@@ -3,7 +3,7 @@
         <div class="logo-img">
             <img src="/assets/img/angular2-logo-red.png"/>
         </div>
-        Creative Tim
+        Adjonu Team
     </a>
 </div>
 <div class="sidebar-wrapper">
@@ -55,11 +55,71 @@
     </ul>
   </div>
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+        <li routerLinkActive="active" class="nav-item">
+            <a class="nav-link" routerLink="/dashboard">
+                <i class="material-icons">dashboard</i>
+                <p>Tableau de Bord</p>
             </a>
         </li>
+        <li class="nav-item">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                    <i class="material-icons">dashboard</i>
+                    <p>Répertoire</p>
+                </mat-expansion-panel-header>
+                <li routerLinkActive="active" *ngFor="let menuItem of menuItems1" class="{{menuItem.class}} nav-item">
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </mat-expansion-panel>
+        </li>
+        
+        <li class="nav-item">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                    <i class="material-icons">dashboard</i>
+                    <p>Enregistrement</p>
+                </mat-expansion-panel-header>
+                <li routerLinkActive="active" *ngFor="let menuItem of menuItems2" class="{{menuItem.class}} nav-item">
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </mat-expansion-panel>
+        </li>
+
+        <li class="nav-item">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                    <i class="material-icons">dashboard</i>
+                    <p>Edition</p>
+                </mat-expansion-panel-header>
+                <li routerLinkActive="active" *ngFor="let menuItem of menuItems3" class="{{menuItem.class}} nav-item">
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </mat-expansion-panel>
+        </li>
+
+        <li class="nav-item">
+            <mat-expansion-panel >
+                <mat-expansion-panel-header>
+                    <i class="material-icons">dashboard</i>
+                    <p>Administration</p>
+                </mat-expansion-panel-header>
+                <li routerLinkActive="active" *ngFor="let menuItem of menuItems4" class="{{menuItem.class}} nav-item">
+                    <a class="nav-link" [routerLink]="[menuItem.path]">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <p>{{menuItem.title}}</p>
+                    </a>
+                </li>
+            </mat-expansion-panel>
+        </li>
+        
     </ul>
 </div>

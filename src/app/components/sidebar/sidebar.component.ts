@@ -15,7 +15,17 @@ export const ROUTES: RouteInfo[] = [
     { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
     { path: '/maps', title: 'Maps',  icon:'location_on', class: '' },
     { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },
+    //Custom Routes
+    { path: '/agences', title: 'Agences / Sites',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/agents-collecteurs', title: 'Agents Collecteurs',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/caissieres', title: 'Caissières',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/clients', title: 'Clients',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/tontines', title: 'Tontines',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/objets-tontines', title: 'Objets de Tontine',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/oper-caisse', title: 'Opérations de Caisse',  icon:'notifications', class: 'sousMenu2' },
+    { path: '/ramassages', title: 'Ramassages',  icon:'notifications', class: 'sousMenu2' },
+    { path: '/users', title: 'Utilisateurs',  icon:'notifications', class: 'sousMenu4' },
+    { path: '/associations', title: 'Associations',  icon:'notifications', class: 'sousMenu4' },
 ];
 
 @Component({
@@ -25,11 +35,21 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
+  menuItems1: any[];
+  menuItems2: any[];
+  menuItems3: any[];
+  menuItems4: any[];
 
   constructor() { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+
+    this.menuItems1 = ROUTES.filter(menuItem => menuItem.class == 'sousMenu1');
+    this.menuItems2 = ROUTES.filter(menuItem => menuItem.class == 'sousMenu2');
+    this.menuItems3 = ROUTES.filter(menuItem => menuItem.class == 'sousMenu3');
+    this.menuItems4 = ROUTES.filter(menuItem => menuItem.class == 'sousMenu4');
+
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

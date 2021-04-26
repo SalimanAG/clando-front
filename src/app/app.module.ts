@@ -22,6 +22,17 @@ import {
   AgmCoreModule
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AgencesComponent } from './customComponents/agences/agences.component';
+import { AgentsCollecteursComponent } from './customComponents/agents-collecteurs/agents-collecteurs.component';
+import { CaissieresComponent } from './customComponents/caissieres/caissieres.component';
+import { ClientsComponent } from './customComponents/clients/clients.component';
+import { TontinesComponent } from './customComponents/tontines/tontines.component';
+import { ObjetsTontineComponent } from './customComponents/objets-tontine/objets-tontine.component';
+import { OperCaisseComponent } from './customComponents/oper-caisse/oper-caisse.component';
+import { RamassagesComponent } from './customComponents/ramassages/ramassages.component';
+import { UtilisateursComponent } from './customComponents/utilisateurs/utilisateurs.component';
+import { AssociationsComponent } from './customComponents/associations/associations.component';
+import { AuthenComponent } from './customComponents/authen/authen.component';
 
 @NgModule({
   imports: [
@@ -39,6 +50,17 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    AgencesComponent,
+    AgentsCollecteursComponent,
+    CaissieresComponent,
+    ClientsComponent,
+    TontinesComponent,
+    ObjetsTontineComponent,
+    OperCaisseComponent,
+    RamassagesComponent,
+    UtilisateursComponent,
+    AssociationsComponent,
+    AuthenComponent,
 
   ],
   providers: [],
