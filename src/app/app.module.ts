@@ -33,6 +33,7 @@ import { RamassagesComponent } from './customComponents/ramassages/ramassages.co
 import { UtilisateursComponent } from './customComponents/utilisateurs/utilisateurs.component';
 import { AssociationsComponent } from './customComponents/associations/associations.component';
 import { AuthenComponent } from './customComponents/authen/authen.component';
+import { MatModulesModule } from './angMatModules/mat-modules/mat-modules.module';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { AuthenComponent } from './customComponents/authen/authen.component';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatModulesModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
