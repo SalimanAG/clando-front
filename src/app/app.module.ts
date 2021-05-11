@@ -34,6 +34,7 @@ import { UtilisateursComponent } from './customComponents/utilisateurs/utilisate
 import { AssociationsComponent } from './customComponents/associations/associations.component';
 import { AuthenComponent } from './customComponents/authen/authen.component';
 import { MatModulesModule } from './angMatModules/mat-modules/mat-modules.module';
+import { NewUserDialogComponent } from './customComponents/utilisateurs/new-user-dialog/new-user-dialog.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,7 @@ import { MatModulesModule } from './angMatModules/mat-modules/mat-modules.module
     UtilisateursComponent,
     AssociationsComponent,
     AuthenComponent,
+    NewUserDialogComponent,
 
   ],
   providers: [],

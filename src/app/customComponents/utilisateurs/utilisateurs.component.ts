@@ -1,7 +1,9 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { NewUserDialogComponent } from './new-user-dialog/new-user-dialog.component';
 
 export interface UserData {
   id: string;
@@ -27,13 +29,13 @@ const NAMES: string[] = [
 })
 export class UtilisateursComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color'];
+  displayedColumns: string[] = ['id', 'name', 'progress', 'color', 'action'];
   dataSource: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog:MatDialog) {
     // Create 100 users
     const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -55,6 +57,10 @@ export class UtilisateursComponent implements OnInit, AfterViewInit  {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onNewUserBottonClicked(){
+    this.dialog.open(NewUserDialogComponent);
   }
 
 }

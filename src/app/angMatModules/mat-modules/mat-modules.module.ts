@@ -8,6 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
 
 const materialCompon = [
   MatButtonModule,
@@ -17,7 +18,8 @@ const materialCompon = [
   MatSortModule,
   MatPaginatorModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatIconModule
 
 ]
 
