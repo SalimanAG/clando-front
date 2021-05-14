@@ -100,7 +100,8 @@
                    </mat-form-field>
                 </div>
             </div>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onValiderUserSaveClicked()">Valider</button>
+            <button mat-raised-button type="submit" class="btn pull-right" (click)="dialogRef.close()">Annuler</button>
             <div class="clearfix"></div>
         </form>
     </div>

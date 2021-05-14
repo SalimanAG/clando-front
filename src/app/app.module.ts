@@ -35,6 +35,7 @@ import { AssociationsComponent } from './customComponents/associations/associati
 import { AuthenComponent } from './customComponents/authen/authen.component';
 import { MatModulesModule } from './angMatModules/mat-modules/mat-modules.module';
 import { NewUserDialogComponent } from './customComponents/utilisateurs/new-user-dialog/new-user-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { NewUserDialogComponent } from './customComponents/utilisateurs/new-user
     RouterModule,
     AppRoutingModule,
     MatModulesModule,
+    ToastrModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })

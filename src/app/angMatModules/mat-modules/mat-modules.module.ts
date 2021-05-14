@@ -12,6 +12,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const materialCompon = [
   MatButtonModule,
@@ -25,7 +27,9 @@ const materialCompon = [
   MatIconModule,
   MatSelectModule,
   MatAutocompleteModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 
 ]
 

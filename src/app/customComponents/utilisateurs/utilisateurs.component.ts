@@ -3,24 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Utilisateur } from 'models/utilisataeur.model';
+import { ToastrService } from 'ngx-toastr';
+import { UtilisateurService } from 'services/administration/utilisateur.service';
 import { NewUserDialogComponent } from './new-user-dialog/new-user-dialog.component';
 
-export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  color: string;
-}
 
-/** Constants used to fill up our data base. */
-const COLORS: string[] = [
-  'maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple', 'fuchsia', 'lime', 'teal',
-  'aqua', 'blue', 'navy', 'black', 'gray'
-];
-const NAMES: string[] = [
-  'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack', 'Charlotte', 'Theodore', 'Isla', 'Oliver',
-  'Isabella', 'Jasper', 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'
-];
 
 @Component({
   selector: 'app-utilisateurs',
@@ -29,25 +17,46 @@ const NAMES: string[] = [
 })
 export class UtilisateursComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns: string[] = ['id', 'name', 'progress', 'color', 'action'];
-  dataSource: MatTableDataSource<UserData>;
+  displayedColumns: string[] = ['login', 'nom', 'prenoms', 'tel', 'actif', 'action'];
+  dataSource: MatTableDataSource<Utilisateur>;
+  utilisateurs: Utilisateur[] = [];
+  isLoadingResults:boolean = false;
+  isLoadingPage:boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(public dialog:MatDialog) {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(public dialog:MatDialog, private serviceUser:UtilisateurService, private toastr: ToastrService) {
+    
+    this.getAllUtilisateur();
+    
   }
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.isLoadingPage = false;
+  }
+
+  getAllUtilisateur(){
+    this.isLoadingResults = true;
+    this.serviceUser.getAllUtilisateurs().subscribe(
+      (data) => {
+        this.utilisateurs = data;
+        this.dataSource = new MatTableDataSource(this.utilisateurs);
+        console.log(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+        this.isLoadingResults = false;
+
+      },
+      (erreur) => {
+        console.log('Erreur lors de récupération de la liste des Utilisateurs', erreur);
+        this.isLoadingResults = false;
+        this.toastr.error('Utilisateurs', 'Erreur lors de la récupération de liste des Utilisateurs.\n Code : '+erreur.status+' | '+erreur.statusText);
+      }
+    );
   }
 
   applyFilter(event: Event) {
@@ -60,21 +69,11 @@ export class UtilisateursComponent implements OnInit, AfterViewInit  {
   }
 
   onNewUserBottonClicked(){
-    this.dialog.open(NewUserDialogComponent);
+    let dialog = this.dialog.open(NewUserDialogComponent);
+    dialog.afterClosed().subscribe(result => {
+      this.getAllUtilisateur();
+    });
   }
 
 }
 
-
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-      NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-  return {
-    id: id.toString(),
-    name: name,
-    progress: Math.round(Math.random() * 100).toString(),
-    color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  };
-}

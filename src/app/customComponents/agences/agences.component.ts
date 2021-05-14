@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-agences',
   templateUrl: './agences.component.html',
   styleUrls: ['./agences.component.css']
 })
-export class AgencesComponent implements OnInit {
+export class AgencesComponent implements OnInit, AfterViewInit {
+
+  isLoadingPage:boolean = true;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.isLoadingPage = true;
+  }
+
+  ngAfterViewInit() {
+    this.isLoadingPage = false;
   }
 
 }
