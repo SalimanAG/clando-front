@@ -1,50 +1,57 @@
 <div class="card" style="margin: -1%;">
     <div class="card-header card-header-warning">
-        <h4 class="card-title">Nouveau Utilisateur</h4>
-        <p class="card-category" style="font-weight: bold; color: white">Enrégistrer un nouveau utilisateur</p>
+        <h4 class="card-title">Modifier Utilisateur</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Modifier les informations sur un utilisateur</p>
     </div>
     <div class="card-body">
-        <form [formGroup]="addAUserForm" (ngSubmit)="onValiderUserSaveClicked()">
+        <form [formGroup]="editAUserForm" (ngSubmit)="onValiderUserEditClicked()">
             <div class="row">
               <div class="col-md-12">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Login" formControlName="login" autocomplete="off">
+                  <input matInput placeholder="Login" formControlName="login" autocomplete="off" 
+                  [ngModel]="dialogData.user.login">
                 </mat-form-field>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Nom" formControlName="nom" autocomplete="off">
+                  <input matInput placeholder="Nom" formControlName="nom" autocomplete="off" 
+                  [ngModel]="dialogData.user.personne.nomPers">
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Prénoms" formControlName="prenoms" autocomplete="off">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Date de Naissance" type="date" formControlName="dateNaissance">
-                </mat-form-field>
-              </div>
-              <div class="col-md-6">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Lieu de Naissance" formControlName="lieuNaissance">
+                  <input matInput placeholder="Prénoms" formControlName="prenoms" autocomplete="off" 
+                  [ngModel]="dialogData.user.personne.prePers">
                 </mat-form-field>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Téléphone" type="number" formControlName="tel" autocomplete="off">
+                  <input matInput placeholder="Date de Naissance" type="date" formControlName="dateNaissance" 
+                  [ngModel]="dialogData.user.personne.datNaiPers">
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Situation Matrimoniale" [matAutocomplete]="auto1" formControlName="situationMatri">
+                  <input matInput placeholder="Lieu de Naissance" formControlName="lieuNaissance" 
+                  [ngModel]="dialogData.user.personne.lieuNaiPers">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Téléphone" type="number" formControlName="tel" autocomplete="off" 
+                  [ngModel]="dialogData.user.personne.numTelPers">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Situation Matrimoniale" [matAutocomplete]="auto1" formControlName="situationMatri" 
+                  [ngModel]="dialogData.user.personne.sitMatPers">
                 </mat-form-field>
                 <mat-autocomplete #auto1="matAutocomplete">
                   <mat-option value="Célibataire">Célibataire</mat-option>
@@ -56,12 +63,14 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Profession" formControlName="profession">
+                  <input matInput placeholder="Profession" formControlName="profession" 
+                  [ngModel]="dialogData.user.personne.profPers">
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Ville de Résidence" formControlName="villeResidence">
+                  <input matInput placeholder="Ville de Résidence" formControlName="villeResidence" 
+                  [ngModel]="dialogData.user.personne.vilPers">
                 </mat-form-field>
               </div>
             </div>
@@ -69,7 +78,7 @@
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <mat-label>Sexe</mat-label>
-                  <mat-select formControlName="sexe">
+                  <mat-select formControlName="sexe" [ngModel]="dialogData.user.personne.sexPers">
                     <mat-option value="M">Masculin</mat-option>
                     <mat-option value="F">Féminin</mat-option>
                   </mat-select>
@@ -83,23 +92,24 @@
             <div class="row">
               <div class="col-md-6">
                 
-                  <mat-checkbox formControlName="actif" >Compte Actif</mat-checkbox>
+                  <mat-checkbox formControlName="actif" [ngModel]="false">Compte Actif</mat-checkbox>
                
               </div>
               <div class="col-md-6">
                 
-                  <mat-checkbox formControlName="askMdp">Demander le Mot de Passe</mat-checkbox>
+                  <mat-checkbox formControlName="askMdp" [ngModel]="dialogData.user.askingPass">Demander le Mot de Passe</mat-checkbox>
                 
               </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                   <mat-form-field class="example-full-width">
-                     <textarea matInput placeholder="Autres Informations" formControlName="autresInfos"></textarea>
+                     <textarea matInput placeholder="Autres Informations" formControlName="autresInfos" 
+                     [ngModel]="dialogData.user.personne.autreinfos"></textarea>
                    </mat-form-field>
                 </div>
             </div>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addAUserForm.invalid">Valider</button>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="editAUserForm.invalid">Valider</button>
             <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
             <div class="clearfix"></div>
         </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarOptions } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-tontines',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TontinesComponent implements OnInit {
 
-  constructor() { }
+  calendarOptions: CalendarOptions;
+
+  constructor() { 
+    this.calendarOptions = {
+      initialView: 'dayGridMonth'
+    };
+  }
 
   ngOnInit(): void {
   }

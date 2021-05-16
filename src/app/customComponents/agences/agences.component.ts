@@ -9,9 +9,11 @@ export class AgencesComponent implements OnInit, AfterViewInit {
 
   isLoadingPage:boolean = true;
 
-  constructor() { }
+  constructor() { 
+    
+  }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.isLoadingPage = true;
   }
 

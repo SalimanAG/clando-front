@@ -1,0 +1,65 @@
+<div class="card card-profile" style="margin-bottom: 0;">
+    <div class="card-avatar">
+        <a href="javascript:void(0)">
+            <img class="img" src="./assets/img/faces/marc.jpg" />
+        </a>
+    </div>
+    <div class="card-body">
+        <h6 class="card-category text-gray">{{ dialogData.user.personne.profPers }}</h6>
+        <h4 class="card-title">{{ dialogData.user.personne.nomPers }} {{ dialogData.user.personne.prePers }}</h4>
+        <tbody class="table table-striped row">
+            <div class="col-md-6">
+                <tr>
+                    <th scope="row">Nom</th>
+                    <td>{{ dialogData.user.personne.nomPers }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Prenom</th>
+                    <td>{{ dialogData.user.personne.prePers }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Date et Lieu de Naissance</th>
+                    <td>{{ dialogData.user.personne.datNaiPers | date:'dd/MM/yyyy' }} à {{ dialogData.user.personne.lieuNaiPers }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Sexe</th>
+                    <td *ngIf="dialogData.user.personne.sexPers.valueOf() == 'M'">Masculin</td>
+                    <td *ngIf="dialogData.user.personne.sexPers.valueOf() == 'F'">Féminin</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Situation Matrimoniale</th>
+                    <td>{{ dialogData.user.personne.sitMatPers }}</td>
+                  </tr>
+            </div>
+            
+            <div class="col">
+                <tr>
+                    <th scope="row">Profession</th>
+                    <td>{{ dialogData.user.personne.profPers }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Numéro de Téléphone</th>
+                    <td>{{ dialogData.user.personne.numTelPers }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ville de résidence</th>
+                    <td>{{ dialogData.user.personne.vilPers }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Login</th>
+                    <td>{{ dialogData.user.login }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Compte Actif ?</th>
+                    <td>Pas encore pris</td>
+                </tr>
+                <tr>
+                    <th scope="row">Autres Informations</th>
+                    <td>{{ dialogData.user.personne.autreinfos }}</td>
+                </tr>
+            </div>
+            
+        </tbody>
+        <a href="javascript:void(0)" (click)="dialogRef.close()" class="btn btn-danger btn-round">Fermer</a>
+    </div>
+</div>

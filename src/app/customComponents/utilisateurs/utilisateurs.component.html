@@ -21,8 +21,8 @@
         
         <div class="card">
             <div class="card-header card-header-danger">
-                <h4 class="card-title ">Simple Table</h4>
-                <p class="card-category"> Here is a subtitle for this table</p>
+                <h4 class="card-title ">Liste des Utilisateur</h4>
+                <p class="card-category" style="font-weight: bold; color: white"> Liste des Utilisateurs du Système</p>
             </div>
             <div class="card-body">
                 <div style="padding-bottom: 6%;">
@@ -79,20 +79,36 @@
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="action">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-                                    <td mat-cell *matCellDef> 
-                                        <button mat-icon-button aria-label="Example icon-button with a heart icon">
+                                    <td mat-cell *matCellDef="let row"> 
+                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onModifAUserClicked(row)">
                                         <mat-icon>edit</mat-icon>
                                         </button>
+                                        <!--
                                         <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
                                         <mat-icon>more</mat-icon>
-                                        </button>
-                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
+                                        </button>-->
+                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onDeleteAUserClicked(row)"
+                                        [swal]="{ title: 'Etes-vous sure ?',
+                                        text: 'Vous voulez supprimer l\'Utilisateur ? \nCette action est irréversible. ',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Oui, Supprimer !',
+                                        cancelButtonText: 'Annuler' }"
+                                        (confirm)="onConfirmUserDelet()"
+                                        (dismiss)="onAnnulerUserDeleteClicked()"
+                                        >
                                         <mat-icon>delete</mat-icon>
                                         </button>
+                                        <!--
                                         <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
                                         <mat-icon>favorite</mat-icon>
-                                        </button>
-                                        <button mat-icon-button style="color:rgb(209, 209, 10)" aria-label="Example icon-button with a heart icon">
+                                        </button>-->
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onInfosAUserClicked(row)">
                                         <mat-icon>info</mat-icon>
                                         </button>
                                     </td>

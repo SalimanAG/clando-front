@@ -36,6 +36,20 @@ import { AuthenComponent } from './customComponents/authen/authen.component';
 import { MatModulesModule } from './angMatModules/mat-modules/mat-modules.module';
 import { NewUserDialogComponent } from './customComponents/utilisateurs/new-user-dialog/new-user-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
+import { EditUserDialogComponent } from './customComponents/utilisateurs/edit-user-dialog/edit-user-dialog.component';
+import { DetailUserDialogComponent } from './customComponents/utilisateurs/detail-user-dialog/detail-user-dialog.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { NewObjetTontineDialogComponent } from './customComponents/objets-tontine/new-objet-tontine-dialog/new-objet-tontine-dialog.component';
+import { EditObjetTontineDialogComponent } from './customComponents/objets-tontine/edit-objet-tontine-dialog/edit-objet-tontine-dialog.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; 
+import dayGridPlugin from '@fullcalendar/daygrid'; 
+import interactionPlugin from '@fullcalendar/interaction'; 
+
+FullCalendarModule.registerPlugins([ 
+  dayGridPlugin,
+  interactionPlugin
+]);
+
 
 @NgModule({
   imports: [
@@ -48,6 +62,8 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     MatModulesModule,
     ToastrModule.forRoot(),
+    SweetAlert2Module.forRoot(),
+    FullCalendarModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -67,6 +83,10 @@ import { ToastrModule } from 'ngx-toastr';
     AssociationsComponent,
     AuthenComponent,
     NewUserDialogComponent,
+    EditUserDialogComponent,
+    DetailUserDialogComponent,
+    NewObjetTontineDialogComponent,
+    EditObjetTontineDialogComponent,
 
   ],
   providers: [],

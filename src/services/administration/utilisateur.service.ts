@@ -18,7 +18,7 @@ export class UtilisateurService {
   }
 
   getAUtilisateurById(code:string){
-    return this.httpCli.get<Utilisateur>(this.host+'definition/user/byId/'+code); 
+    return this.httpCli.get<Utilisateur>(this.host+'definition/user/byCod/'+code); 
   }
 
   addAUtilisateur(corps:Utilisateur){
@@ -26,11 +26,11 @@ export class UtilisateurService {
   }
 
   editAUtilisateur(code:string, corps:Utilisateur){
-    return this.httpCli.put<Utilisateur>(this.host+'definition/user/byId/'+code, corps);
+    return this.httpCli.put<Utilisateur>(this.host+'definition/user/byCod/'+code, corps);
   }
 
   deleteAUtilisateur(code:string){
-    return this.httpCli.delete<boolean>(this.host+'definition/user/byId/'+code);
+    return this.httpCli.delete<boolean>(this.host+'definition/user/byCod/'+code);
   }
 
   //Partie réservée pour Personne
@@ -39,7 +39,7 @@ export class UtilisateurService {
   }
 
   getAPersonneById(code:string){
-    return this.httpCli.get<Personne>(this.host+'definition/perso/byId/'+code); 
+    return this.httpCli.get<Personne>(this.host+'definition/perso/byCod/'+code); 
   }
 
   addAPersonne(corps:Personne){
@@ -47,11 +47,11 @@ export class UtilisateurService {
   }
 
   editAPersonne(code:string, corps:Personne){
-    return this.httpCli.put<Personne>(this.host+'definition/perso/byId/'+code, corps);
+    return this.httpCli.put<Personne>(this.host+'definition/perso/byCod/'+code, corps);
   }
 
   deleteAPersonne(code:string){
-    return this.httpCli.delete<boolean>(this.host+'definition/perso/byId/'+code);
+    return this.httpCli.delete<boolean>(this.host+'definition/perso/byCod/'+code);
   }
 
 }
