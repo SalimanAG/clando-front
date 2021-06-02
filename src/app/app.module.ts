@@ -43,7 +43,11 @@ import { NewObjetTontineDialogComponent } from './customComponents/objets-tontin
 import { EditObjetTontineDialogComponent } from './customComponents/objets-tontine/edit-objet-tontine-dialog/edit-objet-tontine-dialog.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
 import dayGridPlugin from '@fullcalendar/daygrid'; 
-import interactionPlugin from '@fullcalendar/interaction'; 
+import interactionPlugin from '@fullcalendar/interaction';
+import { NewTontineDialogComponent } from './customComponents/tontines/new-tontine-dialog/new-tontine-dialog.component';
+import { EditTontineDialogComponent } from './customComponents/tontines/edit-tontine-dialog/edit-tontine-dialog.component';
+import { DetailTontineDialogComponent } from './customComponents/tontines/detail-tontine-dialog/detail-tontine-dialog.component';
+import { CalendarTontineDialogComponent } from './customComponents/tontines/calendar-tontine-dialog/calendar-tontine-dialog.component'; 
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -87,6 +91,10 @@ FullCalendarModule.registerPlugins([
     DetailUserDialogComponent,
     NewObjetTontineDialogComponent,
     EditObjetTontineDialogComponent,
+    NewTontineDialogComponent,
+    EditTontineDialogComponent,
+    DetailTontineDialogComponent,
+    CalendarTontineDialogComponent,
 
   ],
   providers: [],

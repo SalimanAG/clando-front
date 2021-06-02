@@ -54,7 +54,7 @@ export class ObjetsTontineComponent implements OnInit, AfterViewInit  {
       (data) => {
         this.objetsTontine = data;
         this.dataSource = new MatTableDataSource(this.objetsTontine);
-        console.log(data);
+        //console.log(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -82,7 +82,7 @@ export class ObjetsTontineComponent implements OnInit, AfterViewInit  {
     let dialog = this.dialog.open(NewObjetTontineDialogComponent);
     dialog.afterClosed().subscribe(result => {
       this.getAllObjets();
-      console.log(result);
+      //console.log(result);
     });
   }
 

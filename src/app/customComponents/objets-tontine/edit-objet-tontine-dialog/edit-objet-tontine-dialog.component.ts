@@ -30,11 +30,11 @@ export class EditObjetTontineDialogComponent implements OnInit {
 
   onValiderObjetEditClicked(){
 
-    let newObjet: Objet = new Objet(this.editAObjetTontiForm.value['descri'], this.editAObjetTontiForm.value['composition']);
-    console.log(newObjet);
+    let newObjet: Objet = new Objet(this.editAObjetTontiForm.value['composition'], this.editAObjetTontiForm.value['descri']);
+    //console.log(newObjet);
     this.serviceObjet.editAObjet(this.dialogData.objTonti.idObjet.toString(), newObjet).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         this.dialogRef.close(true);
         this.toastr.success('Modification effectuée avec Succès', 'Modifier Objet de Tontine');
 

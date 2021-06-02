@@ -27,11 +27,11 @@ export class NewObjetTontineDialogComponent implements OnInit {
   }
 
   onValiderObjetSaveClicked(){
-    let newObjet: Objet = new Objet(this.addAObjetTontiForm.value['descri'], this.addAObjetTontiForm.value['composition']);
-    console.log(newObjet);
+    let newObjet: Objet = new Objet(this.addAObjetTontiForm.value['composition'], this.addAObjetTontiForm.value['descri']);
+    //console.log(newObjet);
     this.serviceObjet.addAObjet(newObjet).subscribe(
       (data) => {
-        console.log(data);
+        //console.log(data);
         this.dialogRef.close(true);
         this.toastr.success('Enrégistrement effectué avec Succès', 'Nouveau Objet de Tontine');
 

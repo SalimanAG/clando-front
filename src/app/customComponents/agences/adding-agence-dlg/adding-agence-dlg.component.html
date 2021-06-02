@@ -1,0 +1,38 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Nouvelle agence</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Enrégistrer une nouvelle agence</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="addAgence" (ngSubmit)="valider()">
+            <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Code" formControlName="codAge" autocomplete="off">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Libellé" formControlName="libAge" autocomplete="off">
+                  </mat-form-field>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Date création" formControlName="datAge" autocomplete="off" type="date">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                     <textarea matInput placeholder="Adresse" formControlName="adrAge"></textarea>
+                   </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addAgence.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

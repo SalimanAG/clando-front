@@ -1,0 +1,80 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Modifier une Tontine</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Modifier une souscription de Tontine</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="editATontineForm" (ngSubmit)="onValiderTontineSaveClicked()">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Code" formControlName="numTont" autocomplete="off" 
+                  [ngModel]="dialogData.tontine.numTont" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Mise" type="number" formControlName="mise" autocomplete="off" 
+                    [ngModel]="dialogData.tontine.mise">
+                  </mat-form-field>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Début" type="date" formControlName="dateDebut" 
+                  [ngModel]="dialogData.tontine.dateDebut">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Fin" type="date" formControlName="dateFin" 
+                  [ngModel]="dialogData.tontine.dateFin">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Objet de la Tontine</mat-label>
+                  <mat-select formControlName="objet" [ngModel]="dialogData.tontine.objet.idObjet">
+                    <mat-option *ngFor="let obj of objetsTontine; let i = index"
+                     [value]="obj.idObjet">{{ obj.idObjet }} - {{ obj.description }}</mat-option>
+                    
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Client concerné</mat-label>
+                    <mat-select formControlName="clt" [ngModel]="dialogData.tontine.clt.idClt">
+                      <mat-option *ngFor="let cli of clients; let i = index"
+                       [value]="cli.idClt">{{ cli.idClt }} - {{ cli.personne.nomPers }} {{ cli.personne.prePers }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Agent Collecteur ayant Initié</mat-label>
+                    <mat-select formControlName="collecteur" [ngModel]="dialogData.tontine.collecteur.idCollecteur">
+                      <mat-option *ngFor="let coll of collecteurs; let i = index"
+                       [value]="coll.idCollecteur">{{ coll.idCollecteur }} - {{ coll.personne.nomPers }} {{ coll.personne.prePers }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+            </div>
+            
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="editATontineForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
