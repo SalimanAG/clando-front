@@ -19,8 +19,9 @@ export class EditObjetTontineDialogComponent implements OnInit {
     private bulder: FormBuilder,  private serviceObjet:ObjetsTontineService, 
     @Inject(MAT_DIALOG_DATA) public dialogData:DialogObjTontData1) { 
       this.editAObjetTontiForm = bulder.group({
-        descri: ['', Validators.required],
+        libelle: ['', Validators.required],
         composition: ['', Validators.required],
+        natLot: ['', Validators.required],
         
       })
   }
@@ -30,7 +31,8 @@ export class EditObjetTontineDialogComponent implements OnInit {
 
   onValiderObjetEditClicked(){
 
-    let newObjet: Objet = new Objet(this.editAObjetTontiForm.value['composition'], this.editAObjetTontiForm.value['descri']);
+    let newObjet: Objet = new Objet(this.editAObjetTontiForm.value['composition'], this.editAObjetTontiForm.value['libelle'], 
+    this.editAObjetTontiForm.value['natLot']);
     //console.log(newObjet);
     this.serviceObjet.editAObjet(this.dialogData.objTonti.idObjet.toString(), newObjet).subscribe(
       (data) => {

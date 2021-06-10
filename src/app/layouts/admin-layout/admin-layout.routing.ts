@@ -19,6 +19,8 @@ import { RamassagesComponent } from 'app/customComponents/ramassages/ramassages.
 import { UtilisateursComponent } from 'app/customComponents/utilisateurs/utilisateurs.component';
 import { AssociationsComponent } from 'app/customComponents/associations/associations.component';
 import { AuthenComponent } from 'app/customComponents/authen/authen.component';
+import { TypeDepenseComponent } from 'app/customComponents/type-depense/type-depense.component';
+import { DepensesComponent } from 'app/customComponents/depenses/depenses.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -75,7 +77,7 @@ export const AdminLayoutRoutes: Routes = [
     //Custom Paths
     { path: 'agences',        component: AgencesComponent },
     { path: 'agents-collecteurs',        component: AgentsCollecteursComponent },
-    { path: 'caissieres',        component: CaissieresComponent },
+    { path: 'caisses',        component: CaissieresComponent },
     { path: 'clients',        component: ClientsComponent },
     { path: 'tontines',        component: TontinesComponent },
     { path: 'objets-tontines',        component: ObjetsTontineComponent },
@@ -84,5 +86,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'users',        component: UtilisateursComponent },
     { path: 'associations',        component: AssociationsComponent },
     { path: 'auth',        component: AuthenComponent },
+    { path: 'types-depense',        component: TypeDepenseComponent },
+    { path: 'depenses',        component: DepensesComponent },
 
 ];

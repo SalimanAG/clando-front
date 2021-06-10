@@ -13,6 +13,8 @@ export class UtilisateurService {
 
   constructor(private ipService:UtilitiesService, private httpCli:HttpClient) { }
 
+  //Partie réservée pour Utilisateur
+
   getAllUtilisateurs(){
     return this.httpCli.get<Utilisateur[]>(this.host+'definition/user/all');
   }

@@ -1,0 +1,115 @@
+
+           <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults" style="margin-top: 1%;"></mat-progress-bar>
+           
+           <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Liste des Associations Utilisateur - Agence</h4>
+                <p class="card-category" style="font-weight: bold; color: white"> Liste de l'Association des Utilisateurs aux Agences</p>
+            </div>
+            <div class="card-body">
+                <div style="padding-bottom: 6%;">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <button mat-raised-button color="primary" (click)="onNewUserAgenceBottonClicked()">Nouveau</button>
+                        </div>
+                        <div class="col-md-7">
+
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label>Filter</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                                                          
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                                
+                                    <!-- ID Column -->
+                                    <ng-container matColumnDef="code">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.idAssocier}} </td>
+                                    </ng-container>
+                                
+                                    <!-- Progress Column -->
+                                    <ng-container matColumnDef="utilisateur">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Utilisateur </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.pers.nomPers}} {{row.pers.prePers}} ({{row.pers.numTelPers}})</td>
+                                    </ng-container>
+                                
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="agence">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Agence </th>
+                                    <td mat-cell *matCellDef="let row"> {{ row.agence.codAgence }} - {{ row.agence.libAgence }} ({{ row.agence.adresse }})</td>
+                                    </ng-container>
+                                
+                                    <!-- Color Column -->
+                                    <ng-container matColumnDef="dateDeDebut">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de Début </th>
+                                    <td mat-cell *matCellDef="let row" > {{ row.datDeb }} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="dateDeFin">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date de Fin </th>
+                                    <td mat-cell *matCellDef="let row" > {{ row.datFin }} </td>
+                                    </ng-container>
+
+                                    <!-- Color Column -->
+                                    <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                                    <td mat-cell *matCellDef="let row"> 
+                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onModifAUserAgenceClicked(row)">
+                                        <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!--
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
+                                        <mat-icon>more</mat-icon>
+                                        </button>-->
+                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onDeleteAUserClicked(row)"
+                                        [swal]="{ title: 'Etes-vous sure ?',
+                                        text: 'Vous voulez supprimer l\'association ? \nCette action est irréversible. ',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Oui, Supprimer !',
+                                        cancelButtonText: 'Annuler' }"
+                                        (confirm)="onConfirmUserAgenceDelet()"
+                                        (dismiss)="onAnnulerUserAgenceDeleteClicked()"
+                                        >
+                                        <mat-icon>delete</mat-icon>
+                                        </button>
+                                        <!--
+                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                                        <mat-icon>favorite</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onInfosAUserClicked(row)">
+                                        <mat-icon>info</mat-icon>
+                                        </button>-->
+                                    </td>
+                                    </ng-container>
+                                
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="6" style="text-align: center;">Aucune ligne trouvée</td>
+                                    </tr>
+                                </table>
+                                
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,49 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Modifier une Association Utilisateur - Agence</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Modifier une Association Utilisateur - Agence</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="editAAssoUserToAgenceForm" (ngSubmit)="onValiderAssoUserToAgenceEditClicked()">
+
+              <div class="row">
+                <div class="col-md">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Utilisateur" formControlName="user" autocomplete="off" readonly
+                     [ngModel]="dialogData.user.idUser.toString().concat(' - '.concat(dialogData.user.personne.nomPers.concat(' '.concat(dialogData.user.personne.prePers.valueOf()))))">
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <div class="row">
+                  <div class="col-md">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Agence" formControlName="agence" autocomplete="off" readonly
+                        [ngModel]="dialogData.associer.agence.codAgence.concat(' - '.concat(dialogData.associer.agence.libAgence.valueOf()))">
+                    </mat-form-field>
+                  </div>
+              </div>
+  
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Début" type="date" formControlName="dateDebut" 
+                  [ngModel]="dialogData.associer.datDeb">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Fin" type="date" formControlName="dateFin" 
+                  [ngModel]="dialogData.associer.datFin">
+                </mat-form-field>
+              </div>
+            </div>
+
+            
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="editAAssoUserToAgenceForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

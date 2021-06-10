@@ -47,7 +47,32 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { NewTontineDialogComponent } from './customComponents/tontines/new-tontine-dialog/new-tontine-dialog.component';
 import { EditTontineDialogComponent } from './customComponents/tontines/edit-tontine-dialog/edit-tontine-dialog.component';
 import { DetailTontineDialogComponent } from './customComponents/tontines/detail-tontine-dialog/detail-tontine-dialog.component';
-import { CalendarTontineDialogComponent } from './customComponents/tontines/calendar-tontine-dialog/calendar-tontine-dialog.component'; 
+import { CalendarTontineDialogComponent } from './customComponents/tontines/calendar-tontine-dialog/calendar-tontine-dialog.component';
+import { NewClientDialogComponent } from './customComponents/clients/new-client-dialog/new-client-dialog.component';
+import { EditClientDialogComponent } from './customComponents/clients/edit-client-dialog/edit-client-dialog.component';
+import { DetailClientDialogComponent } from './customComponents/clients/detail-client-dialog/detail-client-dialog.component';
+import { UserToAgenceComponent } from './customComponents/associations/user-to-agence/user-to-agence.component';
+import { UserToCaisseComponent } from './customComponents/associations/user-to-caisse/user-to-caisse.component';
+import { NewAssoUserToAgenceDialogComponent } from './customComponents/associations/user-to-agence/new-asso-user-to-agence-dialog/new-asso-user-to-agence-dialog.component';
+import { EditAssoUserToAgenceDialogComponent } from './customComponents/associations/user-to-agence/edit-asso-user-to-agence-dialog/edit-asso-user-to-agence-dialog.component'; 
+import { AddingAgenceDlgComponent } from './customComponents/agences/adding-agence-dlg/adding-agence-dlg.component';
+import { EditingAgenceDlgComponent } from './customComponents/agences/editing-agence-dlg/editing-agence-dlg.component';
+import { NewCaisseDialogComponent } from './customComponents/caissieres/new-caisse-dialog/new-caisse-dialog.component';
+import { EditCaisseDialogComponent } from './customComponents/caissieres/edit-caisse-dialog/edit-caisse-dialog.component';
+import { NewAssoUserCaisseDialogComponent } from './customComponents/associations/user-to-caisse/new-asso-user-caisse-dialog/new-asso-user-caisse-dialog.component';
+import { EditAssoUserCaisseDialogComponent } from './customComponents/associations/user-to-caisse/edit-asso-user-caisse-dialog/edit-asso-user-caisse-dialog.component';
+import { TypeDepenseComponent } from './customComponents/type-depense/type-depense.component';
+import { DepensesComponent } from './customComponents/depenses/depenses.component';
+import { NewDepenseDialogComponent } from './customComponents/depenses/new-depense-dialog/new-depense-dialog.component';
+import { EditDepenseDialogComponent } from './customComponents/depenses/edit-depense-dialog/edit-depense-dialog.component';
+import { NewTypeDepenseDialogComponent } from './customComponents/type-depense/new-type-depense-dialog/new-type-depense-dialog.component';
+import { EditTypeDepenseDialogComponent } from './customComponents/type-depense/edit-type-depense-dialog/edit-type-depense-dialog.component';
+import { AffecterComponent } from './customComponents/agents-collecteurs/affecter/affecter.component';
+import { DetailCollecteurDialogComponent } from './customComponents/agents-collecteurs/detail-collecteur-dialog/detail-collecteur-dialog.component'
+import { EditCollecteurDialogComponent } from './customComponents/agents-collecteurs/edit-collecteur-dialog/edit-collecteur-dialog.component';
+import { HistoriqueComponent } from './customComponents/agents-collecteurs/historique/historique.component';
+import { NewCollecteurDialogComponent } from './customComponents/agents-collecteurs/new-collecteur-dialog/new-collecteur-dialog.component';
+
 
 FullCalendarModule.registerPlugins([ 
   dayGridPlugin,
@@ -95,6 +120,30 @@ FullCalendarModule.registerPlugins([
     EditTontineDialogComponent,
     DetailTontineDialogComponent,
     CalendarTontineDialogComponent,
+    NewClientDialogComponent,
+    EditClientDialogComponent,
+    DetailClientDialogComponent,
+    UserToAgenceComponent,
+    UserToCaisseComponent,
+    NewAssoUserToAgenceDialogComponent,
+    EditAssoUserToAgenceDialogComponent,
+    AddingAgenceDlgComponent,
+    EditingAgenceDlgComponent,
+    NewCaisseDialogComponent,
+    EditCaisseDialogComponent,
+    NewAssoUserCaisseDialogComponent,
+    EditAssoUserCaisseDialogComponent,
+    TypeDepenseComponent,
+    DepensesComponent,
+    NewDepenseDialogComponent,
+    EditDepenseDialogComponent,
+    NewTypeDepenseDialogComponent,
+    EditTypeDepenseDialogComponent,
+    AffecterComponent,
+    DetailCollecteurDialogComponent,
+    EditCollecteurDialogComponent,
+    HistoriqueComponent,
+    NewCollecteurDialogComponent,
 
   ],
   providers: [],

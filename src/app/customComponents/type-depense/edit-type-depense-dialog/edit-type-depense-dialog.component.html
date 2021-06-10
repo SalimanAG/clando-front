@@ -1,0 +1,30 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Modifier Type de Dépense</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Modifier un Type de Dépense</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="editATypeDepenseForm" (ngSubmit)="onValiderTypeDepenseClicked()">
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Code" formControlName="codMoD" autocomplete="off" 
+                  [ngModel]="dialogData.typeDepense.codeMoD" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Libellé" formControlName="libMoD" autocomplete="off"
+                     [ngModel]="dialogData.typeDepense.libMoD">
+                  </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="editATypeDepenseForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

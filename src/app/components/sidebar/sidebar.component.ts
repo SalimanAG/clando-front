@@ -18,14 +18,16 @@ export const ROUTES: RouteInfo[] = [
     //Custom Routes
     { path: '/agences', title: 'Agences / Sites',  icon:'notifications', class: 'sousMenu1' },
     { path: '/agents-collecteurs', title: 'Agents Collecteurs',  icon:'notifications', class: 'sousMenu1' },
-    { path: '/caissieres', title: 'Caissières',  icon:'notifications', class: 'sousMenu1' },
+    { path: '/caisses', title: 'Caisses',  icon:'notifications', class: 'sousMenu1' },
     { path: '/clients', title: 'Clients',  icon:'notifications', class: 'sousMenu1' },
     { path: '/tontines', title: 'Tontines',  icon:'notifications', class: 'sousMenu1' },
     { path: '/objets-tontines', title: 'Objets de Tontine',  icon:'notifications', class: 'sousMenu1' },
     { path: '/oper-caisse', title: 'Opérations de Caisse',  icon:'notifications', class: 'sousMenu2' },
     { path: '/ramassages', title: 'Ramassages',  icon:'notifications', class: 'sousMenu2' },
+    { path: '/depenses', title: 'Dépenses',  icon:'notifications', class: 'sousMenu2' },
     { path: '/users', title: 'Utilisateurs',  icon:'notifications', class: 'sousMenu4' },
     { path: '/associations', title: 'Associations',  icon:'notifications', class: 'sousMenu4' },
+    { path: '/types-depense', title: 'Types de Dépense',  icon:'notifications', class: 'sousMenu4' },
 ];
 
 @Component({

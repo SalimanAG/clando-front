@@ -17,8 +17,9 @@ export class NewObjetTontineDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<NewObjetTontineDialogComponent>, private toastr: ToastrService,
     private bulder: FormBuilder,  private serviceObjet:ObjetsTontineService) { 
       this.addAObjetTontiForm = bulder.group({
-        descri: ['', Validators.required],
+        libelle: ['', Validators.required],
         composition: ['', Validators.required],
+        natLot: ['', Validators.required],
         
       })
   }
@@ -27,7 +28,8 @@ export class NewObjetTontineDialogComponent implements OnInit {
   }
 
   onValiderObjetSaveClicked(){
-    let newObjet: Objet = new Objet(this.addAObjetTontiForm.value['composition'], this.addAObjetTontiForm.value['descri']);
+    let newObjet: Objet = new Objet(this.addAObjetTontiForm.value['composition'], this.addAObjetTontiForm.value['libelle'], 
+    this.addAObjetTontiForm.value['natLot']);
     //console.log(newObjet);
     this.serviceObjet.addAObjet(newObjet).subscribe(
       (data) => {

@@ -25,7 +25,7 @@ export interface DialogObjTontData1 {
 })
 export class ObjetsTontineComponent implements OnInit, AfterViewInit  {
 
-  displayedColumns: string[] = ['code', 'libelle', 'composition', 'action'];
+  displayedColumns: string[] = ['code', 'libelle', 'composition', 'natureLot', 'action'];
   dataSource: MatTableDataSource<Objet>;
   objetsTontine: Objet[] = [];
   isLoadingResults:boolean = false;

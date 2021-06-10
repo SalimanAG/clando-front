@@ -1,6 +1,150 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <p>agents-collecteurs works!</p>
+
+    <div *ngIf="isLoadingPage" style="position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+        
+        <mat-spinner></mat-spinner>
+        
+        
+    </div>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults && !isLoadingPage"></mat-progress-bar>
+    <div class="container-fluid" *ngIf="!isLoadingPage">
+        
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">AGENTS COLLECTEURS</h4>
+                
+            </div>
+            <div class="card-body">
+                <div style="padding-bottom: 6%;">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p class="card-category" style="font-weight: bold; color: rgb((20, 1, 1)43, 11, 11)"> Liste des agents collecteurs</p>
+                        </div>
+                        <div class="col-sm-2">
+                            <button mat-raised-button color="primary" (click)="newCollecteur()">Nouveau</button>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field>
+                                <mat-label>Filter</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                                                          
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                                
+                                    <!-- ID Column -->
+                                    <ng-container matColumnDef="nom">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.pers.nomPers}} </td>
+                                    </ng-container>
+                                
+                                    <!-- Progress Column -->
+                                    <ng-container matColumnDef="prenoms">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Prénoms </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.pers.prePers}} </td>
+                                    </ng-container>
+                                
+                                    <!-- Color Column -->
+                                    <ng-container matColumnDef="tel">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Téléphone </th>
+                                    <td mat-cell *matCellDef="let row" > {{row.pers.numTelPers}} </td>
+                                    </ng-container>
+                                    
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="datArri">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> DatenArrivée </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.datDeb}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="agence">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Agence ? </th>
+                                    <td mat-cell *matCellDef="let row" > {{row.agence.libAgence}} </td>
+                                    </ng-container>
+
+                                    <!-- Color Column -->
+                                    <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                                    <td mat-cell *matCellDef="let row"> 
+                                        <button  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon"
+                                            data-toggle="modal tooltip" data-placement="above" title="Réaffecter le collecteur"
+                                            (click)="reaffecter(row)">
+                                            <mat-icon>autorenew</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                            data-toggle="modal tooltip" data-placement="above" title="Afficher l'historique du collecteur" (click)="details(row)">
+                                            <mat-icon>more</mat-icon>
+                                        </button>
+                                        <button data-toggle="modal tooltip" data-placement="above" title="Modifier le collecteur" 
+                                            mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                            (click)="edit(row)">
+                                        <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button data-toggle="modal tooltip" data-placement="above" title="Désactiver le collecteur"
+                                            mat-icon-button color="primary" aria-label="Example icon-button with a heart icon"
+                                            [swal]="{ title: 'Désactivation?',
+                                            text: 'Êtes-vous sûr de vouloir désactiver ce collecteur ',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Oui, Supprimer !',
+                                            cancelButtonText: 'Annuler' }"
+                                            (confirm)="onConfirmUserDelet()"
+                                            (dismiss)="onAnnulerUserDeleteClicked()"
+                                        >
+                                        <mat-icon>lock</mat-icon>
+                                        </button>
+                                        <button matTooltip="Supprimer le collecteur" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onDeleteAUserClicked(row)"
+                                        [swal]="{ title: 'Etes-vous sure ?',
+                                        text: 'Vous voulez supprimer l\'Utilisateur ? \nCette action est irréversible. ',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Oui, Supprimer !',
+                                        cancelButtonText: 'Annuler' }"
+                                        (confirm)="delete()"
+                                        (dismiss)="onAnnulerUserDeleteClicked()"
+                                        >
+                                        <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </td>
+                                    </ng-container>
+                                
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="6" style="text-align: center;">Aucune ligne trouvée</td>
+                                    </tr>
+                                </table>
+                                
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

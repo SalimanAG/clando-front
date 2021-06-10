@@ -1,0 +1,53 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Nouvelle Association Utilisateur - Agence</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Enrégistrer une nouvelle Association Utilisateur - Agence</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="addAAssoUserToAgenceForm" (ngSubmit)="onValiderAssoUserToAgenceSaveClicked()">
+
+            <div class="row">
+                <div class="col-md">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Utilisateur</mat-label>
+                    <mat-select formControlName="user">
+                      <mat-option *ngFor="let uti of utilisateurs; let i = index"
+                       [value]="uti">{{ uti.idUser }} - {{ uti.personne.nomPers }} {{ uti.personne.prePers }}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <div class="row">
+                  <div class="col-md">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Agence Concernée</mat-label>
+                      <mat-select formControlName="agence">
+                        <mat-option *ngFor="let agen of agences; let i = index"
+                         [value]="agen">{{ agen.codAgence }} - {{ agen.libAgence }} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+              </div>
+  
+
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Début" type="date" formControlName="dateDebut">
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date de Fin" type="date" formControlName="dateFin">
+                </mat-form-field>
+              </div>
+            </div>
+
+            
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addAAssoUserToAgenceForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
