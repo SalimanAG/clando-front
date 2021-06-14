@@ -53,15 +53,6 @@ export class EditTontineDialogComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(){
-    /*this.editATontineForm.patchValue({
-      collecteur: this.dialogData.tontine.collecteur,
-      clt: this.dialogData.tontine.clt,
-      objet: this.dialogData.tontine.objet
-
-    });*/
-
-    //console.log(this.editATontineForm)
-
   }
 
   getAllClient(){

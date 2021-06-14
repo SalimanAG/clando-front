@@ -44,6 +44,27 @@
               </div>
             </div>
 
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Peut Valider les Types de Dépense</mat-label>
+                  <mat-select formControlName="motifDepenses" multiple id="multiSelect1" [(value)] = "selectedTypesDepense">
+                    <mat-option value = "-1" disabled = "true" (click)="cliquer()">** Tous Sélèctionner **</mat-option>
+                    <mat-option *ngFor="let moti of typesDepense; let i = index"
+                     [value]="moti"
+                     >{{ moti.codeMoD }} - {{ moti.libMoD }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                
+                  <mat-checkbox formControlName="valRamassage" >Peut Valider Les Ramassages de Tontine pour l'Argence ?</mat-checkbox>
+               
+              </div>
+            </div>
             
             <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addAAssoUserToAgenceForm.invalid">Valider</button>
             <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>

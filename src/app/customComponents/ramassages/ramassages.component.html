@@ -1,6 +1,140 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <p>ramassages works!</p>
+
+    <div *ngIf="isLoadingPage" style="position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+        
+        <mat-spinner></mat-spinner>
+        
+        
+    </div>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults && !isLoadingPage"></mat-progress-bar>
+    <div class="container-fluid" *ngIf="!isLoadingPage">
+        
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title ">Liste des ramassages</h4>
+                <p class="card-category" style="font-weight: bold; color: white"> </p>
+            </div>
+            <div class="card-body">
+                <div style="padding-bottom: 6%;">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <button mat-raised-button color="primary" (click)="onNewTontineBottonClicked()">Nouveau</button>
+                        </div>
+                        <div class="col-md-7">
+
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field>
+                                <mat-label>Rechercher</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" #input>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                                                          
+                            <div class="mat-elevation-z8">
+                                <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                                
+                                    <!-- Progress Column -->
+                                    <ng-container matColumnDef="dat">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.dateRam}} </td>
+                                    </ng-container>
+                                
+                                    <!-- ID Column -->
+                                    <ng-container matColumnDef="clt">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.tontine.clt.personne.nomPers}}
+                                        {{row.tontine.clt.personne.prePers}} </td>
+                                    </ng-container>
+                                
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="lot">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Lot </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.lotservi}} </td>
+                                    </ng-container>
+                                
+                                    <!-- Color Column -->
+                                    <!--ng-container matColumnDef="collecteur">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Collecteur </th>
+                                    <td mat-cell *matCellDef="let row" > {{row.collecteur.idCollecteur}} - {{row.collecteur.personne.nomPers}} {{row.collecteur.personne.prePers}}</td>
+                                    </ng-container>
+
+                                    <!-- Color Column -->
+                                    <!--ng-container matColumnDef="client">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                                    <td mat-cell *matCellDef="let row" > {{ row.clt.idClt }} - {{row.clt.personne.nomPers}} {{row.clt.personne.prePers}} </td>
+                                    </ng-container>
+
+                                    <!-- Color Column -->
+                                    <!--ng-container matColumnDef="objet">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Objet </th>
+                                    <td mat-cell *matCellDef="let row" > {{ row.objet.description }} </td>
+                                    </ng-container>
+
+                                    <!-- Color Column -->
+                                    <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                                    <td mat-cell *matCellDef="let row"> 
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="valider(row)">
+                                        <mat-icon>done_all</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onEdit(row)">
+                                        <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onInfosClicked(row)">
+                                        <mat-icon>info</mat-icon>
+                                        </button>    
+                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        (click)="onDelete(row)"
+                                        [swal]="{ title: 'Etes-vous sure ?',
+                                        text: 'Vous voulez supprimer la Tonntine ? \nCette action est irréversible. ',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Oui, Supprimer !',
+                                        cancelButtonText: 'Annuler' }"
+                                        (confirm)="onConfirmDelete()"
+                                        >
+                                        <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </td>
+                                    </ng-container>
+                                
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="7" style="text-align: center;">Aucune ligne trouvée</td>
+                                    </tr>
+                                </table>
+                                
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

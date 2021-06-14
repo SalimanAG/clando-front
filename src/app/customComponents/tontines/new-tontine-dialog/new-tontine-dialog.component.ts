@@ -85,15 +85,6 @@ export class NewTontineDialogComponent implements OnInit {
   }
 
   onValiderTontineSaveClicked(){
-    /*
-        numTont: ['', Validators.required],
-        mise: ['', Validators.required],
-        dateDebut: ['', Validators.required],
-        dateFin: [''],
-        collecteur: ['', Validators.required],
-        clt: ['', Validators.required],
-        objet: ['', Validators.required],
-    */
     let newTontine: Tontine = new Tontine(this.addATontineForm.value['numTont'], this.addATontineForm.value['mise'],
     this.addATontineForm.value['dateDebut'], this.addATontineForm.value['dateFin'],
     this.addATontineForm.value['collecteur'], this.addATontineForm.value['clt'], 

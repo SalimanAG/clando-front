@@ -101,8 +101,8 @@ export class EditCollecteurDialogComponent implements OnInit {
         this.editForm.value['datAr'],this.editForm.value['motif'], dataP)
         this.serCol.editACollecteur(col.idCollecteur.toString(), newCol).subscribe(
           (data2) => {
-            let newAsso= new Associer(this.editForm.value['datArri'],this.editForm.value['datDep'], false,false,
-            this.agences.find(a=> a.codAgence = this.editForm.value['agce']), dataP);
+            let newAsso= new Associer(this.editForm.value['datArri'],this.editForm.value['datDep'],
+            this.agences.find(a=> a.codAgence = this.editForm.value['agce']), dataP, false,false);
             this.assos.editAAssocier(this.dldt.association.idAssocier.toString(),newAsso).subscribe(
               (dataA)=>{
                 this.dialogRef.close(true);

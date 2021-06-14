@@ -71,7 +71,7 @@ export class NewCollecteurDialogComponent implements OnInit {
       this.newForm.value['tel'], this.newForm.value['autresInfos']); 
     //let newAg = this.ags.getAnAgenceById(this.newForm.value['agce']);
     let newAg=this.agences[this.agences.map(a=>a.codAgence).indexOf(this.newForm.value['agce'])];
-     let newAsso=new Associer(this.newForm.value['datC'],null,false, false, newAg,newPers);
+     let newAsso=new Associer(this.newForm.value['datC'],null, newAg,newPers,false, false);
    
     if(newAg!=null){   
       this.users.addAPersonne(newPers).subscribe(

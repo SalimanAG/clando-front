@@ -180,7 +180,7 @@ export class UserToAgenceComponent implements OnInit, AfterViewInit  {
     this.serviceUserAgence.deleteAAssocier(this.deleteUtilisateurAgence.idAssocier.toString()).subscribe(
       (data) => {
         this.toastr.success('Suppression de l\'Association Utilisateur Agence effectuée avec Succès', 'Association');
-        this.getAllUtilisateur();
+        this.getAllAssocier();
       },
       (erreur) => {
         console.log('Erreur lors de la Suppression de Personne.', erreur);

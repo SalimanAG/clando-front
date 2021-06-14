@@ -63,8 +63,8 @@ import { NewAssoUserCaisseDialogComponent } from './customComponents/association
 import { EditAssoUserCaisseDialogComponent } from './customComponents/associations/user-to-caisse/edit-asso-user-caisse-dialog/edit-asso-user-caisse-dialog.component';
 import { TypeDepenseComponent } from './customComponents/type-depense/type-depense.component';
 import { DepensesComponent } from './customComponents/depenses/depenses.component';
-import { NewDepenseDialogComponent } from './customComponents/depenses/new-depense-dialog/new-depense-dialog.component';
-import { EditDepenseDialogComponent } from './customComponents/depenses/edit-depense-dialog/edit-depense-dialog.component';
+import { NewDepenseDialogComponent } from './customComponents/depenses/listes-depense/new-depense-dialog/new-depense-dialog.component';
+import { EditDepenseDialogComponent } from './customComponents/depenses/listes-depense/edit-depense-dialog/edit-depense-dialog.component';
 import { NewTypeDepenseDialogComponent } from './customComponents/type-depense/new-type-depense-dialog/new-type-depense-dialog.component';
 import { EditTypeDepenseDialogComponent } from './customComponents/type-depense/edit-type-depense-dialog/edit-type-depense-dialog.component';
 import { AffecterComponent } from './customComponents/agents-collecteurs/affecter/affecter.component';
@@ -72,6 +72,12 @@ import { DetailCollecteurDialogComponent } from './customComponents/agents-colle
 import { EditCollecteurDialogComponent } from './customComponents/agents-collecteurs/edit-collecteur-dialog/edit-collecteur-dialog.component';
 import { HistoriqueComponent } from './customComponents/agents-collecteurs/historique/historique.component';
 import { NewCollecteurDialogComponent } from './customComponents/agents-collecteurs/new-collecteur-dialog/new-collecteur-dialog.component';
+import { ValidationDepenseComponent } from './customComponents/depenses/validation-depense/validation-depense.component';
+import { ListesDepenseComponent } from './customComponents/depenses/listes-depense/listes-depense.component';
+import { DetailDepenseDialogComponent } from './customComponents/depenses/listes-depense/detail-depense-dialog/detail-depense-dialog.component';
+import { EditRamassageComponent } from './customComponents/ramassages/edit-ramassage/edit-ramassage.component';
+import { ServirTontineComponent } from './customComponents/tontines/servir-tontine/servir-tontine.component';
+import { NewOperCaisseDialogComponent } from './customComponents/oper-caisse/new-oper-caisse-dialog/new-oper-caisse-dialog.component';
 
 
 FullCalendarModule.registerPlugins([ 
@@ -144,6 +150,15 @@ FullCalendarModule.registerPlugins([
     EditCollecteurDialogComponent,
     HistoriqueComponent,
     NewCollecteurDialogComponent,
+    ListesDepenseComponent,
+    ValidationDepenseComponent,
+    DetailDepenseDialogComponent,
+    RamassagesComponent,
+    EditRamassageComponent,
+    EditRamassageComponent,
+    ServirTontineComponent,
+    NewOperCaisseDialogComponent,
+
 
   ],
   providers: [],

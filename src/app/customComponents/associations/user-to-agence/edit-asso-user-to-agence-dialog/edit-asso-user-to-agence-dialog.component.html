@@ -35,8 +35,32 @@
               <div class="col-md-6">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Date de Fin" type="date" formControlName="dateFin" 
-                  [ngModel]="dialogData.associer.datFin">
+                  [ngModel]="dialogData.associer.datFin" (click)="cliii()">
                 </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Peut Valider les Types de Dépense</mat-label>
+                  <mat-select  multiple id="multiSelect1" [(value)] = "selectedTypesDepense" 
+                   >
+                    <mat-option value = "-1" disabled = "true" (click)="cliquer()">** Tous Sélèctionner **</mat-option>
+                    <mat-option *ngFor="let moti of typesDepense; let i = index"
+                     [value]="moti" (click) = "cliii()" 
+                     >{{ moti.codeMoD }} - {{ moti.libMoD }} </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                
+                  <mat-checkbox formControlName="valRamassage" [ngModel]="dialogData.associer.valRamassage"
+                  >Peut Valider Les Ramassages de Tontine pour l'Argence ?</mat-checkbox>
+               
               </div>
             </div>
 

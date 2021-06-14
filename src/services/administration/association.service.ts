@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Associer } from 'models/associer.model';
+import { Confirmer } from 'models/confirmer.model';
 import { UserCaisse } from 'models/userCaisse.model';
 import { UtilitiesService } from 'services/tools/utilities.service';
 
@@ -37,27 +38,50 @@ export class AssociationService {
   }
 
 
-  //Partie réservée pour Association d'un utilisateur à une caisse
+  //Partie réservée pour Confirmer (Association d'une personne à un type de dépense pour une agence donnée)
   
-  getAllUserCaisse(){
-    return this.httpCli.get<UserCaisse[]>(this.host+'cotisation/ucais/all');
+  getAllConfirmer(){
+    return this.httpCli.get<Confirmer[]>(this.host+'cotisation/conf/all');
   }
 
-  getAUserCaisseById(code:string){
-    return this.httpCli.get<UserCaisse>(this.host+'cotisation/ucais/byCod/'+code); 
+  getAConfirmerById(code:string){
+    return this.httpCli.get<Confirmer>(this.host+'cotisation/conf/byCod/'+code); 
   }
 
-  addAUserCaisse(corps:UserCaisse){
-    return this.httpCli.post<UserCaisse>(this.host+'cotisation/ucais/all', corps);
+  addAConfirmer(corps:Confirmer){
+    return this.httpCli.post<Confirmer>(this.host+'cotisation/conf/all', corps);
   }
 
-  editAUserCaisse(code:string, corps:UserCaisse){
-    return this.httpCli.put<UserCaisse>(this.host+'cotisation/ucais/byCod/'+code, corps);
+  editAConfirmer(code:string, corps:Confirmer){
+    return this.httpCli.put<Confirmer>(this.host+'cotisation/conf/byCod/'+code, corps);
   }
 
-  deleteAUserCaisse(code:string){
-    return this.httpCli.delete<boolean>(this.host+'cotisation/ucais/byCod/'+code);
+  deleteAConfirmer(code:string){
+    return this.httpCli.delete<boolean>(this.host+'cotisation/conf/byCod/'+code);
   }
 
+
+    //Partie réservée pour Association d'un utilisateur à une caisse
+  
+    getAllUserCaisse(){
+      return this.httpCli.get<UserCaisse[]>(this.host+'cotisation/ucais/all');
+    }
+  
+    getAUserCaisseById(code:string){
+      return this.httpCli.get<UserCaisse>(this.host+'cotisation/ucais/byCod/'+code); 
+    }
+  
+    addAUserCaisse(corps:UserCaisse){
+      return this.httpCli.post<UserCaisse>(this.host+'cotisation/ucais/all', corps);
+    }
+  
+    editAUserCaisse(code:string, corps:UserCaisse){
+      return this.httpCli.put<UserCaisse>(this.host+'cotisation/ucais/byCod/'+code, corps);
+    }
+  
+    deleteAUserCaisse(code:string){
+      return this.httpCli.delete<boolean>(this.host+'cotisation/ucais/byCod/'+code);
+    }
+  
  
 }

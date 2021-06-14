@@ -1,0 +1,41 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+        <h4 class="card-title">Satisfaction d'un client</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="servirForm" (ngSubmit)="save()">
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date" type="datetime-local" formControlName="dat" autocomplete="off">
+                </mat-form-field>
+              </div>
+              <div class="col-sm-2">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="tontine" type="text" formControlName="ton" readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Client" type="text" formControlName="clt" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-5">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Collecteur" type="text" formControlName="col" readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="example-full-width">
+                   <textarea matInput placeholder="Lot" formControlName="lot" readonly></textarea>
+                 </mat-form-field>
+              </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="servirForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dlgRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

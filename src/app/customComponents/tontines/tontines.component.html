@@ -87,6 +87,14 @@
                                     <ng-container matColumnDef="action">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                                     <td mat-cell *matCellDef="let row"> 
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="oninitRam(row)">
+                                        <mat-icon>label_important</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        (click)="servir(row)">
+                                        <mat-icon>shopping_cart</mat-icon>
+                                        </button>
                                         <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
                                         (click)="onModifATontineClicked(row)">
                                         <mat-icon>edit</mat-icon>

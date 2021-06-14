@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Ramassage } from 'models/ramassage.model';
 import { Tontine } from 'models/tontine.model';
 import { UtilitiesService } from 'services/tools/utilities.service';
 
@@ -31,6 +32,28 @@ export class TontineService {
   deleteATontine(code:string){
     return this.httpCli.delete<boolean>(this.host+'cotisation/ton/byCod/'+code);
   }
+
+  /////////Traitement de ramassage
     
+  getAllRamassage(){
+    return this.httpCli.get<Ramassage[]>(this.host+'cotisation/ramassage/all');
+  }
+
+  getARamassageById(code:String){
+    return this.httpCli.get<Ramassage>(this.host+'cotisation/ramassage/byCod/'+code); 
+  }
+
+  addARamassage(corps:Ramassage){
+    return this.httpCli.post<Ramassage>(this.host+'cotisation/ramassage/all', corps);
+  }
+
+  editARamassage(code:String, corps:Ramassage){
+    return this.httpCli.put<Ramassage>(this.host+'cotisation/ramassage/byCod/'+code, corps);
+  }
+
+  deleteARamassage(code: String){
+    return this.httpCli.delete<boolean>(this.host+'cotisation/ramassage/byCod/'+code);
+  }
+
 
 }

@@ -1,1 +1,40 @@
-<p>depenses works!</p>
+<div class="main-content">
+
+    <div *ngIf="isLoadingPage" style="position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+        
+        <mat-spinner></mat-spinner>
+        
+        
+    </div>
+
+    <div class="container-fluid" *ngIf="!isLoadingPage">
+        <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="sal-tab-icon">thumb_up</mat-icon>
+                Dépenses
+              </ng-template>
+              <app-listes-depense></app-listes-depense>
+            </mat-tab>
+          
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="sal-tab-icon">thumb_up</mat-icon>
+                Valider Dépense
+              </ng-template>
+              <app-validation-depense></app-validation-depense>
+            </mat-tab>
+          
+          </mat-tab-group>
+    </div>
+</div>
+
