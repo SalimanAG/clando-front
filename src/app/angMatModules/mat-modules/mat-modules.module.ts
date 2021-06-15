@@ -15,6 +15,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 const materialCompon = [
   MatButtonModule,
@@ -31,7 +33,8 @@ const materialCompon = [
   MatCheckboxModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
-  MatTabsModule
+  MatTabsModule,
+  MatExpansionModule,
 
 ]
 

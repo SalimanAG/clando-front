@@ -24,7 +24,7 @@ export class RamassagesComponent implements OnInit, AfterViewInit {
   dataSource : MatTableDataSource<Ramassage>
   isLoadingPage=true;
   isLoadingResults=false;
-  ramas =new Ramassage(null,'','',0,0,'',false,null,'');
+  ramas =new Ramassage(null,'','',0,0,'',false,null,null);
   
   displayedColumns: string[] = ['dat', 'clt', 'lot', 'action'];
   @ViewChild(MatSort) sort : MatSort;

@@ -21,6 +21,10 @@ import { AssociationsComponent } from 'app/customComponents/associations/associa
 import { AuthenComponent } from 'app/customComponents/authen/authen.component';
 import { TypeDepenseComponent } from 'app/customComponents/type-depense/type-depense.component';
 import { DepensesComponent } from 'app/customComponents/depenses/depenses.component';
+import { CollectesComponent } from 'app/customComponents/rapports/collectes/collectes.component';
+import { TontinesRapComponent } from 'app/customComponents/rapports/tontines-rap/tontines-rap.component';
+import { AgencesRapComponent } from 'app/customComponents/rapports/agences-rap/agences-rap.component';
+import { CollecteursRapComponent } from 'app/customComponents/rapports/collecteurs-rap/collecteurs-rap.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -88,5 +92,23 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'auth',        component: AuthenComponent },
     { path: 'types-depense',        component: TypeDepenseComponent },
     { path: 'depenses',        component: DepensesComponent },
+    {
+        path: 'rapports',
+        children: [ 
+            {
+                path: 'collectes',
+                component: CollectesComponent},
+            {
+                path: 'tontines',
+                component: TontinesRapComponent},
+            {
+                path: 'agences',
+                component: AgencesRapComponent},
+            {
+                path: 'collecteurs',
+                component: CollecteursRapComponent},
+        
+        ]
+    }
 
 ];

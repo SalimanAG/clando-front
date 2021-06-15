@@ -78,6 +78,11 @@ import { DetailDepenseDialogComponent } from './customComponents/depenses/listes
 import { EditRamassageComponent } from './customComponents/ramassages/edit-ramassage/edit-ramassage.component';
 import { ServirTontineComponent } from './customComponents/tontines/servir-tontine/servir-tontine.component';
 import { NewOperCaisseDialogComponent } from './customComponents/oper-caisse/new-oper-caisse-dialog/new-oper-caisse-dialog.component';
+import { CollectesComponent } from './customComponents/rapports/collectes/collectes.component';
+import { CollecteursRapComponent } from './customComponents/rapports/collecteurs-rap/collecteurs-rap.component';
+import { AgencesRapComponent } from './customComponents/rapports/agences-rap/agences-rap.component';
+import { TontinesRapComponent } from './customComponents/rapports/tontines-rap/tontines-rap.component';
+import { PdfViewerComponent } from './customComponents/pdf-viewer/pdf-viewer.component';
 
 
 FullCalendarModule.registerPlugins([ 
@@ -158,6 +163,11 @@ FullCalendarModule.registerPlugins([
     EditRamassageComponent,
     ServirTontineComponent,
     NewOperCaisseDialogComponent,
+    CollectesComponent,
+    CollecteursRapComponent,
+    AgencesRapComponent,
+    TontinesRapComponent,
+    PdfViewerComponent,
 
 
   ],
