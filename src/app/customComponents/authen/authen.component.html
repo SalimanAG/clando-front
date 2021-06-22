@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
-          <form novalidate="" method="" action="" class="form ng-untouched ng-pristine ng-valid">
+          <form [formGroup]="connnectForm" (ngSubmit)="loginClicked()" class="form ng-untouched ng-pristine ng-valid">
             <div class="card card-login">
               <div class="card-header card-header-rose text-center">
                 <h4 class="card-title">Authentification</h4>
@@ -21,17 +21,8 @@
                         <i class="material-icons">face</i>
                       </span>
                     </div>
-                    <input type="text" placeholder="First Name..." class="form-control">
-                  </div>
-                </span>
-                <span class="bmd-form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">email</i>
-                      </span>
-                    </div>
-                    <input type="email" placeholder="Email..." class="form-control">
+                    <input type="text" placeholder="Identifiant" class="form-control" formControlName="login" 
+                    (change)="identifiantSuplied()">
                   </div>
                 </span>
                 <span class="bmd-form-group">
@@ -41,12 +32,24 @@
                         <i class="material-icons">lock_outline</i>
                       </span>
                     </div>
-                    <input type="password" placeholder="Password..." class="form-control">
+                    <input type="password" placeholder="Mot de Passe" class="form-control" 
+                    formControlName="mdp">
+                  </div>
+                </span>
+                <span class="bmd-form-group" *ngIf="confirmation">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" placeholder="Mot de Passe" class="form-control" 
+                    formControlName="mdp2">
                   </div>
                 </span>
               </div>
               <div class="card-footer justify-content-center">
-                <a class="btn btn-rose btn-link btn-lg" (click)="loginClicked()">Connecter</a>
+                <button type="submit" class="btn btn-rose btn-link btn-lg" [disabled]="connnectForm.invalid">Connecter</button>
               </div>
             </div>
           </form>

@@ -25,6 +25,7 @@ import { CollectesComponent } from 'app/customComponents/rapports/collectes/coll
 import { TontinesRapComponent } from 'app/customComponents/rapports/tontines-rap/tontines-rap.component';
 import { AgencesRapComponent } from 'app/customComponents/rapports/agences-rap/agences-rap.component';
 import { CollecteursRapComponent } from 'app/customComponents/rapports/collecteurs-rap/collecteurs-rap.component';
+import { AuthGuardService } from 'services/tools/auth-guard.service';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -69,7 +70,7 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
+    { path: 'dashboard',   canActivate:[AuthGuardService],   component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
@@ -79,21 +80,22 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade',        component: UpgradeComponent },
 
     //Custom Paths
-    { path: 'agences',        component: AgencesComponent },
-    { path: 'agents-collecteurs',        component: AgentsCollecteursComponent },
-    { path: 'caisses',        component: CaissieresComponent },
-    { path: 'clients',        component: ClientsComponent },
-    { path: 'tontines',        component: TontinesComponent },
-    { path: 'objets-tontines',        component: ObjetsTontineComponent },
-    { path: 'oper-caisse',        component: OperCaisseComponent },
-    { path: 'ramassages',        component: RamassagesComponent },
-    { path: 'users',        component: UtilisateursComponent },
-    { path: 'associations',        component: AssociationsComponent },
+    { path: 'agences',    canActivate:[AuthGuardService],    component: AgencesComponent },
+    { path: 'agents-collecteurs',    canActivate:[AuthGuardService],    component: AgentsCollecteursComponent },
+    { path: 'caisses',   canActivate:[AuthGuardService],     component: CaissieresComponent },
+    { path: 'clients',   canActivate:[AuthGuardService],     component: ClientsComponent },
+    { path: 'tontines',    canActivate:[AuthGuardService],    component: TontinesComponent },
+    { path: 'objets-tontines',   canActivate:[AuthGuardService],     component: ObjetsTontineComponent },
+    { path: 'oper-caisse',   canActivate:[AuthGuardService],     component: OperCaisseComponent },
+    { path: 'ramassages',    canActivate:[AuthGuardService],    component: RamassagesComponent },
+    { path: 'users',    canActivate:[AuthGuardService],    component: UtilisateursComponent },
+    { path: 'associations',    canActivate:[AuthGuardService],    component: AssociationsComponent },
     { path: 'auth',        component: AuthenComponent },
-    { path: 'types-depense',        component: TypeDepenseComponent },
-    { path: 'depenses',        component: DepensesComponent },
+    { path: 'types-depense',    canActivate:[AuthGuardService],    component: TypeDepenseComponent },
+    { path: 'depenses' ,   canActivate:[AuthGuardService], component: DepensesComponent },
     {
         path: 'rapports',
+        canActivate:[AuthGuardService],
         children: [ 
             {
                 path: 'collectes',

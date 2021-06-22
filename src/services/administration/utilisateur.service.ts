@@ -10,6 +10,8 @@ import { UtilitiesService } from 'services/tools/utilities.service';
 export class UtilisateurService {
 
   private host:string = this.ipService.ipAdresseAPI.valueOf();
+  isAuth: boolean = false;
+  connectedUser: Utilisateur = null;
 
   constructor(private ipService:UtilitiesService, private httpCli:HttpClient) { }
 
@@ -21,6 +23,10 @@ export class UtilisateurService {
 
   getAUtilisateurById(code:string){
     return this.httpCli.get<Utilisateur>(this.host+'definition/user/byCod/'+code); 
+  }
+
+  getAUtilisateurByLoginMdp(corps:Utilisateur){
+    return this.httpCli.post<Utilisateur>(this.host+'definition/user/byLoginMdpUser', corps); 
   }
 
   addAUtilisateur(corps:Utilisateur){
