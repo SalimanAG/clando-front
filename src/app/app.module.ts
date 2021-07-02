@@ -83,6 +83,10 @@ import { CollecteursRapComponent } from './customComponents/rapports/collecteurs
 import { AgencesRapComponent } from './customComponents/rapports/agences-rap/agences-rap.component';
 import { TontinesRapComponent } from './customComponents/rapports/tontines-rap/tontines-rap.component';
 import { PdfViewerComponent } from './customComponents/pdf-viewer/pdf-viewer.component';
+import { ValidatDepenseDialogComponent } from './customComponents/depenses/validation-depense/validat-depense-dialog/validat-depense-dialog.component';
+import { NewRamassageComponent } from './customComponents/tontines/new-ramassage/new-ramassage.component';
+import { NewDepenseComponent } from './customComponents/oper-caisse/new-depense/new-depense.component';
+import { NewVenteComponent } from './customComponents/oper-caisse/new-vente/new-vente.component';
 
 
 FullCalendarModule.registerPlugins([ 
@@ -168,6 +172,10 @@ FullCalendarModule.registerPlugins([
     AgencesRapComponent,
     TontinesRapComponent,
     PdfViewerComponent,
+    ValidatDepenseDialogComponent,
+    NewRamassageComponent,
+    NewDepenseComponent,
+    NewVenteComponent,
 
 
   ],

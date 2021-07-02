@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Ramassage } from 'models/ramassage.model';
 import { TontineService } from 'services/repertoire/tontine.service';
 import { Tontine } from 'models/tontine.model';
+import { Carnet } from 'models/carnet.model';
+import { Affecter } from 'models/affecter.model';
 
 @Component({
   selector: 'app-edit-ramassage',
@@ -16,7 +18,10 @@ import { Tontine } from 'models/tontine.model';
 })
 export class EditRamassageComponent implements OnInit {
 
+  affectations : Affecter[]=[];
+  CollTon : Affecter[]=[];
   tontines : Tontine[]=[];
+  carnets : Carnet[]=[];
   tontinevalable : Tontine[]=[];
   rama : Ramassage[]=[];
   editForm : FormGroup
@@ -27,20 +32,23 @@ export class EditRamassageComponent implements OnInit {
       this.editForm = bulder.group({
         dat: [moment(new Date()).format("YYYY-MM-DDThh:mm"), Validators.required],
         ton: [dialogData.ramassage.tontine.numTont, Validators.required],
-        clt: [dialogData.ramassage.tontine.clt.personne.nomPers+' '+
-        dialogData.ramassage.tontine.clt.personne.prePers+' '+dialogData.ramassage.tontine.clt.personne.numTelPers, Validators.required],
+        //carnet: [dialogData.ramassage.tontine.numTont, Validators.required],
+        clt: [dialogData.ramassage.tontine.carnet.client.personne.nomPers+' '+
+        dialogData.ramassage.tontine.carnet.client.personne.prePers+' '+dialogData.ramassage.tontine.carnet.client.personne.numTelPers, Validators.required],
         col: [dialogData.ramassage.tontine.collecteur.personne.nomPers+' '+
         dialogData.ramassage.tontine.collecteur.personne.prePers, Validators.required], 
         typ: [dialogData.ramassage.typeRam, Validators.required],
-        nat: [dialogData.ramassage.tontine.objet.natLot, Validators.required], 
-        lot: [dialogData.ramassage.tontine.objet.composition, Validators.required], 
-        lott: [dialogData.ramassage.tontine.objet.composition, Validators.required], 
+        nat: [dialogData.ramassage.tontine.carnet.objet.natLot, Validators.required], 
+        lot: [dialogData.ramassage.tontine.carnet.objet.composition, Validators.required], 
+        lott: [dialogData.ramassage.tontine.carnet.objet.composition, Validators.required], 
         pen: [dialogData.ramassage.penalite], com: [dialogData.ramassage.complement], 
-        obj: [dialogData.ramassage.tontine.objet.composition, Validators.required]
-      });
+        obj: [dialogData.ramassage.tontine.carnet.objet.composition, Validators.required],
+        collecteur: ['', Validators.required]});
       console.log(dialogData.ramassage);
       
     this.chargerTontine();
+    this.chargerCarnet();
+    this.chargerAffectations();
    }
 
    chargerTontine(){
@@ -57,14 +65,27 @@ export class EditRamassageComponent implements OnInit {
      );
    }
 
+   chargerCarnet(){
+     this.tns.getAllCarnet().subscribe(
+       data=>{
+         this.carnets=data;
+       });
+   }
+
+   chargerAffectations(){
+     this.tns.getAllAffecter().subscribe(
+       data=>{
+         this.affectations=data;
+       });
+    }
+
   ngOnInit(): void {
   }
 
   save(){
     let newRam=new Ramassage(this.editForm.value['dat'],this.editForm.value['typ'],this.editForm.value['nat'],
       this.editForm.value['pen'], this.editForm.value['com'], this.editForm.value['lot'],
-      this.dialogData.ramassage.valider,this.tontines.find(t=>t.numTont == this.editForm.value['ton']),
-      this.dialogData.ramassage.opcaisse);
+      this.dialogData.ramassage.valider,this.dialogData.ramassage.tontine,null);
     if(this.dialogData.ramassage.tontine.servir != null){
       if(this.dialogData.ramassage.penalite != this.editForm.value['pen'] || 
         this.dialogData.ramassage.complement != this.editForm.value['com'] || 
@@ -94,7 +115,7 @@ export class EditRamassageComponent implements OnInit {
             if(this.dialogData.ramassage.tontine.numTont != this.editForm.value['ton']){
               let anton = this.dialogData.ramassage.tontine;
               anton.encours=true;
-              this.tns.editATontine(anton.numTont.valueOf(),anton).subscribe(
+              this.tns.editATontine(anton.numTont.toString(),anton).subscribe(
                 dataat=>{
                   let at = newRam.tontine;
                   at.encours=false;

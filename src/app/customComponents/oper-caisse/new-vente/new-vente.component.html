@@ -1,0 +1,114 @@
+<div class="card" style="margin: -1%;">
+    <div class="card-header card-header-warning">
+      <meta charset="utf-8">
+        <h4 class="card-title">Nouvelle Opération de Caisse</h4>
+        <p class="card-category" style="font-weight: bold; color: white">Enrégistrer une nouvelle opération de caisse</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="addVenteForm" (ngSubmit)="save()">
+
+            <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date opération" type="datetime-local" formControlName="dateOp">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Caisse</mat-label>
+                  <mat-select formControlName="caisse" (selectionChange)="filtreCollecteur()" >
+                    <mat-option *ngFor="let obj of objetsCaisse; let i = index"
+                      [value]="obj">{{ obj.libeCaisse }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Collecteurs</mat-label>
+                  <mat-select formControlName="col" (selectionChange)="addCarnets()">
+                    <mat-option *ngFor="let coll of collecteursV; let i = index"
+                      [value]="coll">{{ coll.personne.nomPers }} {{ coll.personne.prePers }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                                                  
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                        
+                            <!-- ID Column -->
+                            <ng-container matColumnDef="Num">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Carnet </th>
+                            <td mat-cell *matCellDef="let row"> 
+                              <input matInput type="text" [(ngModel)]="row.idCarnet" [ngModelOptions]="{standalone: true}"
+                               autocomplete="off">
+                               </td>
+                            </ng-container>
+                        
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="clt" >
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                            <td mat-cell *matCellDef="let row"> 
+                              <mat-select [(ngModel)]="row.client" [ngModelOptions]="{standalone: true}">
+                                <mat-option *ngFor="let c of clients; let i = index"
+                                  [value]="c">{{ c.personne.nomPers }} {{ c.personne.prePers }}</mat-option>
+                              </mat-select>
+                               </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="obj" >
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                              <td mat-cell *matCellDef="let row"> 
+                                <mat-select [(ngModel)]="row.objet" [ngModelOptions]="{standalone: true}">
+                                  <mat-option *ngFor="let ob of objets; let i = index"
+                                    [value]="ob">{{ ob.libelle }}</mat-option>
+                                </mat-select>
+                                 </td>
+                              </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="mise">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mise </th>
+                            <td mat-cell *matCellDef="let row">
+                              <input matInput type="number" [(ngModel)]="row.mise" [ngModelOptions]="{standalone: true}" > </td>
+                            </ng-container>
+
+                            <!-- Color Column -->
+                            <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                            <td mat-cell *matCellDef="let row"> 
+                                <button type="button" mat-icon-button color="green" aria-label="Example icon-button with a heart icon" 
+                                (click)="addCarnets()">
+                                <mat-icon>add</mat-icon>
+                                </button>
+                                <button type="button" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                (click)="removeCarnet(row)">
+                                  <mat-icon>remove</mat-icon>
+                                </button>
+                            </td>
+                            </ng-container>
+                        
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                            <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="6" style="text-align: center;">Aucune ligne trouvée</td>
+                            </tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <input matInput type="number" readonly placeholder="Total" > {{total}}
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addVenteForm.invalid">Valider</button>
+            <button mat-raised-button type="button" class="btn pull-right" (click)="dlgRef.close(false)">Annuler</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

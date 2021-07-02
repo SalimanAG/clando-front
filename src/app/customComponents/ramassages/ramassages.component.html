@@ -41,6 +41,7 @@
                         </div>
                     </div>
                     
+                    
                     <div class="row">
                         <div class="col-md-12">
                                                           
@@ -88,19 +89,23 @@
                                     <ng-container matColumnDef="action">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                                     <td mat-cell *matCellDef="let row"> 
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Valider le ramassage"
+                                         mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
                                         (click)="valider(row)">
                                         <mat-icon>done_all</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Modifier le ramassage"
+                                         mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
                                         (click)="onEdit(row)">
                                         <mat-icon>edit</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Détail du ramassage"
+                                        mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
                                         (click)="onInfosClicked(row)">
                                         <mat-icon>info</mat-icon>
                                         </button>    
-                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Supprimer le ramassage"
+                                         mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
                                         (click)="onDelete(row)"
                                         [swal]="{ title: 'Etes-vous sure ?',
                                         text: 'Vous voulez supprimer la Tonntine ? \nCette action est irréversible. ',

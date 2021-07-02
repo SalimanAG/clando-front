@@ -1,0 +1,21 @@
+/*.cdk-global-overlay-wrapper {
+    pointer-events: auto !important;
+    display: block !important;
+    position: relative !important;
+    overflow: auto !important;
+    text-align: center !important;
+  }
+  
+  .cdk-global-overlay-wrapper::before {
+    content: '' !important;
+    display: inline-block !important;
+    height: 100% !important;
+    white-space: nowrap !important;
+  }
+  
+  .cdk-overlay-pane {
+    display: inline-block !important;
+    position: relative !important;
+    text-align: left !important;
+    white-space: normal !important;
+  }*/

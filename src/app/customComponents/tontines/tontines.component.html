@@ -74,28 +74,31 @@
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="client">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
-                                    <td mat-cell *matCellDef="let row" > {{ row.clt.idClt }} - {{row.clt.personne.nomPers}} {{row.clt.personne.prePers}} </td>
+                                    <td mat-cell *matCellDef="let row" > {{ row.carnet.client.idClt}} - {{row.carnet.client.personne.nomPers}} {{row.carnet.client.personne.prePers}} </td>
                                     </ng-container>
 
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="objet">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Objet </th>
-                                    <td mat-cell *matCellDef="let row" > {{ row.objet.description }} </td>
+                                    <td mat-cell *matCellDef="let row" > {{ row.carnet.objet.description }} </td>
                                     </ng-container>
 
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="action">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                                     <td mat-cell *matCellDef="let row"> 
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Initier le ramassage"
+                                         mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
                                         (click)="oninitRam(row)">
                                         <mat-icon>label_important</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Satisfaire le client"
+                                         mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
                                         (click)="servir(row)">
                                         <mat-icon>shopping_cart</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Modifier la tontine"
+                                         mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
                                         (click)="onModifATontineClicked(row)">
                                         <mat-icon>edit</mat-icon>
                                         </button>                                        
@@ -103,7 +106,8 @@
                                         (click)="onCalendarATontineClicked(row)">
                                         <mat-icon>date_range</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Supprimer la tontine"
+                                         mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
                                         (click)="onDeleteATontineClicked(row)"
                                         [swal]="{ title: 'Etes-vous sure ?',
                                         text: 'Vous voulez supprimer la Tonntine ? \nCette action est irréversible. ',
@@ -117,7 +121,8 @@
                                         >
                                         <mat-icon>delete</mat-icon>
                                         </button>
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
+                                        <button data-toggle="modal tooltip" title="Détail de la tontine"
+                                         mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
                                         (click)="onInfosATontineClicked(row)">
                                         <mat-icon>info</mat-icon>
                                         </button>

@@ -1,11 +1,13 @@
+import { Agence } from "./agence.model";
 import { MotifDepense } from "./motifDepense.model";
+import { OpCaisse } from "./opcaisse.model";
 
 export class Depense {
 
     
-    constructor(public numDep: String, public dateDep: Date, public beneficiaire: String,
-        public description: String, public montant: number, public etatValide: String,
-        public opCaisse: any, public motif: MotifDepense){
+    constructor(public numDep: number, public dateDep: Date, public beneficiaire: String,
+        public description: String, public montant: number, public etatValide: boolean,
+        public opCaisse: OpCaisse, public motif: MotifDepense, public agence: Agence){
 
     }
 

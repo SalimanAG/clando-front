@@ -1,0 +1,168 @@
+<div class="card" style="margin: 0;">
+    <div class="card-body">
+        <!--
+        <h6 class="card-category text-gray" style="text-align: center;">Dépennse {{ dialogData.depense.numDep }} du {{ dialogData.depense.dateDep | date: 'dd/MM/yyyy' }}</h6>
+        <h4 class="card-title" style="text-align: center;"> Agence {{ dialogData.depense.agence.libAgence }} ({{ dialogData.depense.agence.adresse }})</h4>
+        -->
+        <tbody class="table table-striped row">
+            <div class="col-md-6">
+                  <tr>
+                    <th scope="row">Code</th>
+                    <td>{{ dialogData.depense.numDep }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Type</th>
+                    <td>{{ dialogData.depense.motif.codeMoD }} - {{ dialogData.depense.motif.libMoD }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bénéficiaire</th>
+                    <td>{{ dialogData.depense.beneficiaire }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Date</th>
+                    <td>{{ dialogData.depense.dateDep | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Montant</th>
+                    <td>{{ dialogData.depense.montant }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Agence</th>
+                    <td>{{ dialogData.depense.agence.codAgence }} - {{ dialogData.depense.agence.libAgence }} ({{ dialogData.depense.agence.adresse }})</td>
+                  </tr>
+
+            </div>
+            
+            <div class="col">
+                
+                <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ dialogData.depense.description }}</td>
+                </tr>
+                <tr *ngIf="dialogData.depense.opCaisse">
+                    <th scope="row">Opération de Caisse Associée</th>
+                    <td>Opération N° {{ dialogData.depense.opCaisse.numOpCaisse }} du {{ dialogData.depense.opCaisse.dateOp }} à la caisse {{ dialogData.depense.opCaisse.caisse.codeCaisse }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs devrant Valider</th>
+                    <td>
+                        <span *ngFor="let per1 of validateurs">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateurs.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant Donné avis Favorable</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursOui">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursOui.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant donné avis Défavorable</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursNon">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursNon.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant donné Aucun Avis</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursNull">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursNull.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+            </div>
+            
+        </tbody>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-checkbox [(ngModel)]="modeValidation">Donner votre Avis</mat-checkbox>
+            </div>
+            <div class="col-md-8" *ngIf="modeValidation">
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Laissez un commentaire sur votre Avis" [(ngModel)]="commentaire"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div *ngIf="modeValidation">
+            <div *ngIf="!userValidation">
+                <div>
+                    <button mat-raised-button  class="btn btn-success pull-right" 
+                    [swal]="{ title: 'Etes-vous sure ?',
+                        text: 'Confirmez-vous votre Avis ? ',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui',
+                        cancelButtonText: 'Non' }"
+                        (confirm)="onConfirmAvis('V')"
+                    >Favorable</button>
+                </div>
+                    
+                <div>
+                    <button mat-raised-button  class="btn btn-danger pull-right"
+                    [swal]="{ title: 'Etes-vous sure ?',
+                        text: 'Confirmez-vous votre Avis ? ',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui',
+                        cancelButtonText: 'Non' }"
+                        (confirm)="onConfirmAvis('R')"
+                    >Défavorable</button>
+                </div>
+            </div>
+
+            <div *ngIf="userValidation">
+                <div *ngIf="(userValidation.avis.valueOf() != 'V')">
+                    <button mat-raised-button  class="btn btn-success pull-right" 
+                    [swal]="{ title: 'Etes-vous sure ?',
+                        text: 'Confirmez-vous votre Avis ? ',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui',
+                        cancelButtonText: 'Non' }"
+                        (confirm)="onConfirmAvis('V')"
+                    >Favorable</button>
+                </div >
+                    
+                <div *ngIf="(userValidation.avis.valueOf() != 'R')">
+                    <button mat-raised-button  class="btn btn-danger pull-right"
+                    [swal]="{ title: 'Etes-vous sure ?',
+                        text: 'Confirmez-vous votre Avis ? ',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui',
+                        cancelButtonText: 'Non' }"
+                        (confirm)="onConfirmAvis('R')"
+                    >Défavorable</button>
+                </div>
+        
+                <div *ngIf="!(userValidation.avis.valueOf() != 'R' && userValidation.avis.valueOf() != 'V')">
+                    <button mat-raised-button type="button" class="btn btn-primary pull-right" 
+                    [swal]="{ title: 'Etes-vous sure ?',
+                        text: 'Confirmez-vous votre Avis ? ',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Oui',
+                        cancelButtonText: 'Non' }"
+                        (confirm)="onConfirmAvis('A')"
+                    >Aucun Avis</button>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="javascript:void(0)" (click)="dialogRef.close()" class="btn pull-left">Fermer</a>
+    
+    </div>
+</div>

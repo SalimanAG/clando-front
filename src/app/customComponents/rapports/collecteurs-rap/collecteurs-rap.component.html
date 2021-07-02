@@ -21,13 +21,45 @@
             <mat-expansion-panel hideToggle>
               <mat-expansion-panel-header>
                 <mat-panel-title>
-                  This is the expansion title
+                  Activités périodique par agence et par
                 </mat-panel-title>
                 <mat-panel-description>
-                  This is a summary of the content
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>This is the primary content of the panel.</p>
+              <form [formGroup]="activites" (ngSubmit)="imprimeActivites()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>type de ramassage</mat-label>
+                      <mat-select formControlName="agc" (selectionChange)="filtre()">
+                        <mat-option *ngFor="let a of agences" [value]="a">{{a.libAgence}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <mat-label>Collecteurs</mat-label>
+                      <mat-select formControlName="col" >
+                        <mat-option *ngFor="let coll of colAgce; let i = index"
+                          [value]="coll">{{ coll.personne.nomPers }} {{ coll.personne.prePers }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Date début" type="datetime-local" formControlName="deb" autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Date fin" type="datetime-local" formControlName="fin" autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right" >imprimeActivites()</button>
+              </form>
             </mat-expansion-panel>
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false">

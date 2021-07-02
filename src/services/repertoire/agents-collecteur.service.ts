@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Collecte } from 'models/collecte.model';
 import { Collecteur } from 'models/collecteur.model';
 import { UtilitiesService } from 'services/tools/utilities.service';
 
@@ -30,6 +31,30 @@ export class AgentsCollecteurService {
 
   deleteACollecteur(code:string){
     return this.httpCli.delete<boolean>(this.host+'definition/collecteur/byCod/'+code);
+  }
+  
+  getAllCollectes(){
+    return this.httpCli.get<Collecte[]>(this.host+'cotisation/collecte/all');
+  }
+
+  getACollecteById(code:string){
+    return this.httpCli.get<Collecte>(this.host+'cotisation/collecte/byCod/'+code); 
+  }
+//
+  //getCollecteByCollectteur(code:string, deb: Date, fin: Date){
+//    return this.httpCli.get<Collecte>(this.host+'definition/collecte/byCol/'+code, deb, fin); 
+//  }
+
+  addACollecte(corps:Collecte){
+    return this.httpCli.post<Collecte>(this.host+'cotisation/collecte/all', corps);
+  }
+
+  editACollecte(code:string, corps:Collecte){
+    return this.httpCli.put<Collecte>(this.host+'cotisation/collecte/byCod/'+code, corps);
+  }
+
+  deleteACollecte(code:string){
+    return this.httpCli.delete<boolean>(this.host+'cotisation/collecte/byCod/'+code);
   }
   
 }

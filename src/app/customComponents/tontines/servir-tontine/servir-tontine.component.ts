@@ -38,12 +38,12 @@ export class ServirTontineComponent implements OnInit {
         this.ramassages=data;
         this.ramas = this.ramassages.find(r=>r.tontine.numTont == this.tontineData.tontine.numTont);
         this.servirForm.patchValue({ton: this.ramas.tontine.numTont,
-          clt: this.ramas.tontine.clt.personne.nomPers+' '+
-          this.ramas.tontine.clt.personne.prePers+' '+this.ramas.tontine.clt.personne.numTelPers,
+          clt: this.ramas.tontine.carnet.client.personne.nomPers+' '+
+          this.ramas.tontine.carnet.client.personne.prePers+' '+this.ramas.tontine.carnet.client.personne.numTelPers,
           col: this.ramas.tontine.collecteur.personne.nomPers+' '+
           this.ramas.tontine.collecteur.personne.prePers, 
-          lot: this.ramas.tontine.objet.composition,
-          lott: this.ramas.tontine.objet.composition })
+          lot: this.ramas.tontine.carnet.objet.composition,
+          lott: this.ramas.tontine.carnet.objet.composition })
       },
     err=>{
       console.log(err);

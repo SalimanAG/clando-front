@@ -1,1 +1,81 @@
-<p>detail-depense-dialog works!</p>
+<div class="card" style="margin: 0;">
+    <div class="card-body">
+        
+        <h6 class="card-category text-gray" style="text-align: center;">Dépennse {{ dialogData.depense.numDep }} du {{ dialogData.depense.dateDep | date: 'dd/MM/yyyy' }}</h6>
+        <h4 class="card-title" style="text-align: center;"> Agence {{ dialogData.depense.agence.libAgence }} ({{ dialogData.depense.agence.adresse }})</h4>
+        
+        <tbody class="table table-striped row">
+            <div class="col-md-6">
+                  <tr>
+                    <th scope="row">Code</th>
+                    <td>{{ dialogData.depense.numDep }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Type</th>
+                    <td>{{ dialogData.depense.motif.codeMoD }} - {{ dialogData.depense.motif.libMoD }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Bénéficiaire</th>
+                    <td>{{ dialogData.depense.beneficiaire }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Date</th>
+                    <td>{{ dialogData.depense.dateDep | date:'dd/MM/yyyy' }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Montant</th>
+                    <td>{{ dialogData.depense.montant }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Agence</th>
+                    <td>{{ dialogData.depense.agence.codAgence }} - {{ dialogData.depense.agence.libAgence }} ({{ dialogData.depense.agence.adresse }})</td>
+                  </tr>
+
+            </div>
+            
+            <div class="col">
+                
+                <tr>
+                    <th scope="row">Description</th>
+                    <td>{{ dialogData.depense.description }}</td>
+                </tr>
+                <tr *ngIf="dialogData.depense.opCaisse">
+                    <th scope="row">Opération de Caisse Associée</th>
+                    <td>Opération N° {{ dialogData.depense.opCaisse.numOpCaisse }} du {{ dialogData.depense.opCaisse.dateOp }} à la caisse {{ dialogData.depense.opCaisse.caisse.codeCaisse }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs devrant Valider</th>
+                    <td>
+                        <span *ngFor="let per1 of validateurs">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateurs.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant Donné avis Favorable</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursOui">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursOui.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant donné avis Défavorable</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursNon">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursNon.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Utilisateurs ayant donné Aucun Avis</th>
+                    <td>
+                        <span *ngFor="let per1 of validateursNull">{{ per1.idUser }} - {{ per1.personne.nomPers }} {{ per1.personne.prePers }} <strong> ; </strong></span>
+                        <strong *ngIf="validateursNull.length == 0" >AUCUN</strong>
+                    </td>
+                </tr>
+            </div>
+            
+        </tbody>
+       
+        <a href="javascript:void(0)" (click)="dialogRef.close()" class="btn btn-danger btn-round pull-right">Fermer</a>
+    
+    </div>
+</div>

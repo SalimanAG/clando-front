@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Affecter } from 'models/affecter.model';
+import { Carnet } from 'models/carnet.model';
 import { Ramassage } from 'models/ramassage.model';
 import { Tontine } from 'models/tontine.model';
 import { UtilitiesService } from 'services/tools/utilities.service';
@@ -33,6 +35,28 @@ export class TontineService {
     return this.httpCli.delete<boolean>(this.host+'cotisation/ton/byCod/'+code);
   }
 
+///////Traitement de Carnet
+
+  getAllCarnet(){
+    return this.httpCli.get<Carnet[]>(this.host+'definition/carnet/all');
+  }
+
+  getACarnetId(code:string){
+    return this.httpCli.get<Carnet>(this.host+'definition/carnet/byCod/'+code); 
+  }
+
+  addACarnet(corps:Carnet){
+    return this.httpCli.post<Carnet>(this.host+'definition/carnet/all', corps);
+  }
+
+  editACarnet(code:string, corps:Carnet){
+    return this.httpCli.put<Carnet>(this.host+'definition/carnet/byCod/'+code, corps);
+  }
+
+  deleteACarnet(code:string){
+    return this.httpCli.delete<boolean>(this.host+'definition/carnet/byCod/'+code);
+  }
+
   /////////Traitement de ramassage
     
   getAllRamassage(){
@@ -53,6 +77,28 @@ export class TontineService {
 
   deleteARamassage(code: String){
     return this.httpCli.delete<boolean>(this.host+'cotisation/ramassage/byCod/'+code);
+  }
+
+  /////////Traitement de AFFECTER
+    
+  getAllAffecter(){
+    return this.httpCli.get<Affecter[]>(this.host+'cotisation/affecter/all');
+  }
+
+  getAnAffecterById(code:String){
+    return this.httpCli.get<Affecter>(this.host+'cotisation/affecter/byCod/'+code); 
+  }
+
+  addAnAffecter(corps:Affecter){
+    return this.httpCli.post<Affecter>(this.host+'cotisation/affecter/all', corps);
+  }
+
+  editAAffecter(code:String, corps:Affecter){
+    return this.httpCli.put<Affecter>(this.host+'cotisation/affecter/byCod/'+code, corps);
+  }
+
+  deleteAAffecter(code: String){
+    return this.httpCli.delete<boolean>(this.host+'cotisation/affecter/byCod/'+code);
   }
 
 

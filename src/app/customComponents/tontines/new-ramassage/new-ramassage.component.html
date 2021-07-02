@@ -5,14 +5,20 @@
     <div class="card-body">
         <form [formGroup]="newForm" (ngSubmit)="save()">
             <div class="row">
+              <div class="col-md-2">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Tontine N°" type="number" formControlName="ton" autocomplete="off"
+                  readonly>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Carnet N°" type="number" formControlName="car" readonly >
+                </mat-form-field>
+              </div>
               <div class="col-md-3">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Date" type="datetime-local" formControlName="dat" autocomplete="off">
-                </mat-form-field>
-              </div>
-              <div class="col-md-1">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="tontine" type="text" formControlName="ton" readonly>
                 </mat-form-field>
               </div>
               <div class="col-md-5">
@@ -20,14 +26,14 @@
                   <input matInput placeholder="Client" type="text" formControlName="clt" readonly>
                 </mat-form-field>
               </div>
+            </div>
+            <div class="row">
               <div class="col-md-3">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Collecteur" type="text" formControlName="col" readonly>
                 </mat-form-field>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2">
+              <div class="col-md-3">
                 <mat-form-field class="example-full-width">
                   <mat-label>type de ramassage</mat-label>
                   <mat-select formControlName="typ" (selectionChange)="aServir()">
@@ -36,7 +42,7 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <mat-form-field class="example-full-width">
                   <mat-label>Type de lot</mat-label>
                   <mat-select formControlName="nat">
@@ -45,12 +51,12 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Pénalité" type="number" formControlName="pen">
                 </mat-form-field>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <mat-form-field class="example-full-width">
                   <input matInput placeholder="Complément" formControlName="com">
                 </mat-form-field>

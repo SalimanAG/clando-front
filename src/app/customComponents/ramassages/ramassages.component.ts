@@ -79,7 +79,7 @@ export class RamassagesComponent implements OnInit, AfterViewInit {
       let tont = this.ramas.tontine.numTont;
       this.tns.deleteARamassage(this.ramas.numRama).subscribe(
         (data) => {
-          this.tns.deleteATontine(tont.valueOf()).subscribe(
+          this.tns.deleteATontine(tont.toString()).subscribe(
             data=>{
               this.tst.success('Suppression effectuée avec Succès', 'Ramassage');
               this.getAllRamassages();

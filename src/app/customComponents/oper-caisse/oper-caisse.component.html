@@ -21,19 +21,24 @@
         
         <div class="card">
             <div class="card-header card-header-danger">
-                <h4 class="card-title ">Liste des Opérations de caisse</h4>
-                <p class="card-category" style="font-weight: bold; color: white"> Liste des Opérations de caisse du système</p>
+                <h4 class="card-title ">Liste des Opérations de caisse du jour</h4>
             </div>
             <div class="card-body">
-                <div style="padding-bottom: 6%;">
+                <div style="padding-bottom: 50%;">
                     <div class="row">
-                        <div class="col-sm-1">
-                            <button mat-raised-button color="primary" (click)="onNewcaisseBottonClicked()">Nouveau</button>
+                        <div class="col-sm-4">
+                            <button mat-raised-button color="primary" (click)="onNewcaisseBottonClicked()">Nouvelle centralisation</button>
                         </div>
-                        <div class="col-md-7">
-
+                        <div class="col-sm-4">
+                            <button mat-raised-button color="primary" (click)="newVente()">Nouvelle vente de carnet</button>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-sm-4">
+                            <button mat-raised-button color="primary" (click)="newDepense()">Nouvelle sortie</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7"></div>
+                        <div class="col-md-5">
                             <mat-form-field>
                                 <mat-label>Filter</mat-label>
                                 <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
@@ -45,61 +50,84 @@
                         <div class="col-md-12">
                                                           
                             <div class="mat-elevation-z8">
-                                <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                                <table mat-table [dataSource]="list" matSort style="width: 100%;">
                                 
                                     <!-- ID Column -->
-                                    <ng-container matColumnDef="codeCaisse">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.codeCaisse}} </td>
+                                    <ng-container matColumnDef="num">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Numéro </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.numOpCaisse}} </td>
                                     </ng-container>
                                 
                                     <!-- Progress Column -->
-                                    <ng-container matColumnDef="libeCaisse">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Libellé </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.libeCaisse}} </td>
+                                    <ng-container matColumnDef="cai">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Caisse </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.caisse.libeCaisse}} </td>
                                     </ng-container>
                                 
                                     <!-- Name Column -->
-                                    <ng-container matColumnDef="agence">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Agence </th>
-                                    <td mat-cell *matCellDef="let row"> {{row.agence.libAgence}} </td>
+                                    <ng-container matColumnDef="dat">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                                    <td mat-cell *matCellDef="let row"> {{row.dateOp |date:'dd/MM/yyyy hh:mm'}} </td>
                                     </ng-container>
                                 
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="typ">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                                        <td mat-cell *matCellDef="let row"> {{row.typeOp.libTyp}} </td>
+                                        </ng-container>
                                     <!-- Color Column -->
                                     <ng-container matColumnDef="action">
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
                                     <td mat-cell *matCellDef="let row"> 
-                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
-                                        (click)="onModifLCaisseClicked(row)">
-                                        <mat-icon>edit</mat-icon>
+                                        <button data-toggle="modal tooltip" title="Annuler l'opération de caisse"
+                                         *ngIf="row.valide" mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                            (click)="annulClicked(row)"
+                                            [swal]="{ title: 'Etes-vous sure ?',
+                                            text: 'Êtes-vous sûr(e) de vouloir annuler cette opération de caisse ? \nCette action est irréversible. ',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Oui, continuer !',
+                                            cancelButtonText: 'non, abandonner' }"
+                                            (confirm)="annule()"
+                                            (dismiss)="abandonneAnnul()"
+                                        >
+                                        <mat-icon>undo</mat-icon>
                                         </button>
-                                        <!--
-                                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-                                        <mat-icon>more</mat-icon>
-                                        </button>-->
-                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
-                                        (click)="onDeleteCaisseClicked(row)"
+                                        
+                                        <button data-toggle="modal tooltip" title="Valider l'opération de caisse"
+                                         *ngIf="!row.valide" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon"
+                                        (click)="deleteClicked(row)"
                                         [swal]="{ title: 'Etes-vous sure ?',
-                                        text: 'Vous voulez supprimer la caisse ? \nCette action est irréversible. ',
+                                        text: 'êtes-vous sûr(e) de vouloir revalider cette opération de caisse ? \nCette action est irréversible. ',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Oui, continuer !',
+                                        cancelButtonText: 'Annuler' }"
+                                        (confirm)="valider()"
+                                        (dismiss)="abandonneLal()"
+                                        >
+                                        <mat-icon>redo</mat-icon>
+                                        </button>
+                                        <button data-toggle="modal tooltip" title="Supprimer l'opération de caisse"
+                                         *ngIf="!row.valide" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                        (click)="deleteClicked(row)"
+                                        [swal]="{ title: 'Etes-vous sure ?',
+                                        text: 'êtes-vous sûr(e) de vouloir supprimer cette opération de caisse ? \nCette action est irréversible. ',
                                         icon: 'warning',
                                         showCancelButton: true,
                                         confirmButtonColor: '#3085d6',
                                         cancelButtonColor: '#d33',
                                         confirmButtonText: 'Oui, Supprimer !',
                                         cancelButtonText: 'Annuler' }"
-                                        (confirm)="onConfirmCaisseDelet()"
-                                        (dismiss)="onAnnulerCaisseDeleteClicked()"
+                                        (confirm)="delete()"
+                                        (dismiss)="abandonneSup()"
                                         >
                                         <mat-icon>delete</mat-icon>
                                         </button>
-                                        <!--
-                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-                                        <mat-icon>favorite</mat-icon>
-                                        </button>-->
-                                        <!--button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" 
-                                        (click)="onInfosAUserClicked(row)">
-                                        <mat-icon>info</mat-icon>
-                                        </button-->
                                     </td>
                                     </ng-container>
                                 

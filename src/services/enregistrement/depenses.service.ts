@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
+import { Depense } from 'models/depense.model';
 import { MotifDepense } from 'models/motifDepense.model';
+import { Valider } from 'models/valider.model';
 import { UtilitiesService } from 'services/tools/utilities.service';
 
 @Injectable({
@@ -32,16 +34,16 @@ export class DepensesService {
 
   /////////////Traitement des  dépense//////////////
   getAllDepense(){
-    return this.http.get<MotifDepense[]>(this.hote+'cotisation/depense/all');
+    return this.http.get<Depense[]>(this.hote+'cotisation/depense/all');
   }
   getADepense(cod : String){
-    return this.http.get<MotifDepense[]>(this.hote+'cotisation/depense/ByCod/'+cod);
+    return this.http.get<Depense[]>(this.hote+'cotisation/depense/ByCod/'+cod);
   }
-  saveADepense(corp: MotifDepense){
-    return this.http.post<MotifDepense>(this.hote+'cotisation/depense/all',corp);
+  saveADepense(corp: Depense){
+    return this.http.post<Depense>(this.hote+'cotisation/depense/all',corp);
   }
-  editADepense(cod: String, corps: MotifDepense){
-    return this.http.put<MotifDepense>(this.hote+'cotisation/depense/byCod/'+cod,corps);
+  editADepense(cod: String, corps: Depense){
+    return this.http.put<Depense>(this.hote+'cotisation/depense/byCod/'+cod,corps);
   }
   deleteADepense(cod: String){
     return this.http.delete<boolean>(this.hote+'cotisation/depense/byCod/'+cod);
@@ -49,16 +51,16 @@ export class DepensesService {
 
   /////////////Traitement des motifs de dépense//////////////
   getAllValidation(){
-    return this.http.get<MotifDepense[]>(this.hote+'cotisation/valider/all');
+    return this.http.get<Valider[]>(this.hote+'cotisation/valider/all');
   }
   getAValidation(cod : String){
-    return this.http.get<MotifDepense[]>(this.hote+'cotisation/valider/byCod'+cod);
+    return this.http.get<Valider[]>(this.hote+'cotisation/valider/byCod'+cod);
   }
-  saveAValidation(corp: MotifDepense){
-    return this.http.post<MotifDepense>(this.hote+'cotisation/valider/all',corp);
+  saveAValidation(corp: Valider){
+    return this.http.post<Valider>(this.hote+'cotisation/valider/all',corp);
   }
-  editAValidation(cod: String, corps: MotifDepense){
-    return this.http.put<MotifDepense>(this.hote+'cotisation/valider/byCod/'+cod,corps);
+  editAValidation(cod: String, corps: Valider){
+    return this.http.put<Valider>(this.hote+'cotisation/valider/byCod/'+cod,corps);
   }
   deleteAValidation(cod: String){
     return this.http.delete<boolean>(this.hote+'cotisation/valider/byCod'+cod);

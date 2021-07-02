@@ -20,7 +20,7 @@ export class OperCaisseService {
   }
 
   addAnOpCaisse(corp: OpCaisse){
-    return this.http.post<OpCaisse[]>(this.hote+'cotisation/opc/all',corp);
+    return this.http.post<OpCaisse>(this.hote+'cotisation/opc/all',corp);
   }
 
   editAnllOpCaisse(cod : String, corp: OpCaisse){

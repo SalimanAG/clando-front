@@ -1,56 +1,134 @@
 <div class="card" style="margin: -1%;">
     <div class="card-header card-header-warning">
+      <meta charset="utf-8">
         <h4 class="card-title">Nouvelle Opération de Caisse</h4>
         <p class="card-category" style="font-weight: bold; color: white">Enrégistrer une nouvelle opération de caisse</p>
     </div>
     <div class="card-body">
-        <form [formGroup]="addOpCaisseForm" (ngSubmit)="onValiderCaisseSaveClicked()">
+        <form [formGroup]="addOpCaisseForm" (ngSubmit)="save()">
 
             <div class="row">
+              <div class="col-md-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Date opération" type="datetime-local" formControlName="dateOp">
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Caisse</mat-label>
+                  <mat-select formControlName="caisse" (selectionChange)="filtreCollecteur()" >
+                    <mat-option *ngFor="let obj of objetsCaisse; let i = index"
+                      [value]="obj">{{ obj.codeCaisse }} - {{ obj.libeCaisse }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Collecteurs</mat-label>
+                  <mat-select formControlName="col" (selectionChange)="prepareCollecte()">
+                    <mat-option *ngFor="let coll of collecteursV; let i = index"
+                      [value]="coll">{{ coll.personne.nomPers }} {{ coll.personne.prePers }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Collecte du:" type="date" formControlName="dateCol">
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Date opération" type="date" formControlName="dateOp">
-                  </mat-form-field>
+                                                  
+                    <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource" matSort style="width: 100%;">
+                        
+                            <!-- ID Column -->
+                            <!--ng-container matColumnDef="datC">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Tontine </th>
+                            <td mat-cell *matCellDef="let row"> 
+                              <input matInput type="date" formControlName="datCol" 
+                              [(ngModel)]="row.dateCollecte" autocomplete="off">
+                           </td>
+                            </ng-container>
+                        
+                            <!-- Progress Column -->
+                            <ng-container matColumnDef="carn">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Carnet </th>
+                            <td mat-cell *matCellDef="let row"> {{row.tontine.carnet.idCarnet}} </td>
+                            </ng-container>
+                        
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="clt">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+                            <td mat-cell *matCellDef="let row"> 
+                              {{row.tontine.carnet.client.personne.nomPers}} {{row.tontine.carnet.client.personne.prePers}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="mise">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Mise </th>
+                            <td mat-cell *matCellDef="let row">
+                               {{row.tontine.carnet.mise}} </td>
+                            </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="nbre">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header > Nb. mise </th>
+                              <td mat-cell *matCellDef="let row"> 
+                                <input matInput type="number" formControlName="nbM" 
+                                [(ngModel)]="row.nbreMise" (change)="recalculer()" autocomplete="off">
+                             </td>
+                              </ng-container>
+
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="mtt">
+                              <th mat-header-cell *matHeaderCellDef mat-sort-header> Montant </th>
+                              <td mat-cell *matCellDef="let row" autocomplete="off">
+                                {{row.tontine.carnet.mise*row.nbreMise}}
+                              </td>
+                              </ng-container>
+    
+                            <!-- Color Column -->
+                            <ng-container matColumnDef="action">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
+                            <td mat-cell *matCellDef="let row"> 
+                                <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" 
+                                (click)="onModifAObjetClicked(row)">
+                                <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" 
+                                (click)="onDeleteAObjetClicked(row)"
+                                [swal]="{ title: 'Etes-vous sûre ?',
+                                text: 'Vous voulez supprimer l\'Objet de Tontine ? \nCette action est irréversible. ',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Oui, Supprimer !',
+                                cancelButtonText: 'Annuler' }"
+                                (confirm)="onConfirmObjetTontiDelet()"
+                                >
+                                <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                            </ng-container>
+                        
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        
+                            <!-- Row shown when there is no matching data. -->
+                            <tr class="mat-row" *matNoDataRow>
+                            <td class="mat-cell" colspan="6" style="text-align: center;">Aucune ligne trouvée</td>
+                            </tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+                    </div>
                 </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Type opération" formControlName="typeOp" autocomplete="off">
-                </mat-form-field>
-              </div>
+              <input matInput type="number" readonly placeholder="Total" > {{total}}
             </div>
-            <!--div class="row">
-              <div class="col-md-12">
-                <mat-form-field class="example-full-width">
-                  <input matInput placeholder="libelle" formControlName="libelle" autocomplete="off">
-                </mat-form-field>
-              </div>
-            </div-->
-            <!--column for agence-->
-            <div class="row">
-                <div class="col-md">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Caisse</mat-label>
-                    <mat-select formControlName="caisse">
-                      <mat-option *ngFor="let obj of objetsCaisse; let i = index"
-                       [value]="obj">{{ obj.codeCaisse }} - {{ obj.libeCaisse }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-            <div class="row">
-                <div class="col-md">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Utilisateur</mat-label>
-                    <mat-select formControlName="user">
-                      <mat-option *ngFor="let obj of objetsUser; let i = index"
-                       [value]="obj">{{ obj.personne.nomPers }}  {{ obj.personne.prePers }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-           
             <button mat-raised-button type="submit" class="btn btn-danger pull-right" [disabled]="addOpCaisseForm.invalid">Valider</button>
             <button mat-raised-button type="button" class="btn pull-right" (click)="dialogRef.close(false)">Annuler</button>
             <div class="clearfix"></div>
